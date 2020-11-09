@@ -9,8 +9,6 @@
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
-    "predeploy": "rm -rf dist && parcel build index.html --public--url /personal_site",
-    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "shader-park-core": "https://github.com/shader-park/shader-park-core.git",

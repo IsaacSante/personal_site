@@ -1,7 +1,8 @@
+
+    uniform float u_time;
       uniform vec3 colorA; 
       uniform vec3 colorB; 
       varying vec3 vUv;
-      uniform float u_time;
       
       void main() {
         gl_FragColor = vec4(mix(sin(u_time * 1.0) + colorA, sin(u_time * 1.0) + colorB, vUv.x), 1.0);

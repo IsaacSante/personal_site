@@ -34,7 +34,7 @@ import {
   }
 
   let uniforms;
-  let container, container2, scene, scene2, camera, camera2, renderer, renderer2,  controls, mesh, clock, mesh2, time, geometry, wireGeo, line;
+  let container, container2, scene, scene2, camera, camera2, renderer, renderer2,  controls, mesh, clock, mesh2, time, geometry, wireGeo, line, material;
   let stats;
   let sculpture;
 
@@ -46,7 +46,6 @@ import {
     clock = new Clock();
     createRenderer();
     createGeometry();
-
     // fetch('https://iyapo-repo.glitch.me/mynewdata', {
     //     mode: 'cors',
     //     headers: {
@@ -69,14 +68,6 @@ import {
       stats = Stats.default();
       document.body.appendChild( stats.dom );
   }
-    renderer.setAnimationLoop(() => {
-      stats.begin();
-      animate();
-      renderer.render(scene, camera);
-      renderer2.render(scene2, camera2);
-      stats.end();
-      uniforms.u_time.value = clock.getElapsedTime();
-  });
 
   }
 
@@ -137,11 +128,11 @@ function createRenderer() {
 
       uniforms = {
         u_time: { value: 0.0 },
-        colorB: {type: 'vec3', value: new Color(0xACB6E5)},
-        colorA: {type: 'vec3', value: new Color(0x74ebd5)}
+        colorA: {type: 'vec3', value: new Color(0x74ebd5)},
+        colorB: {type: 'vec3', value: new Color(0xACB6E5)}
       };
 
-      const material = new ShaderMaterial({
+      material = new ShaderMaterial({
         uniforms: uniforms,
         vertexShader: vertexShader,
         fragmentShader: fragmentShader
@@ -174,6 +165,9 @@ function createRenderer() {
     wireGeo = new WireframeGeometry (geometry3, matLine)
     line = new LineSegments( wireGeo );
     scene2.add( line );
+
+
+
   }
 
  function animate(){
@@ -194,4 +188,13 @@ function createRenderer() {
 
 // window.addEventListener("resize", onWindowResize, false);
   init();
-
+  setTimeout(function() { 
+    renderer.setAnimationLoop(() => {
+      stats.begin();
+      animate();
+      renderer.render(scene, camera);
+      renderer2.render(scene2, camera2);
+      stats.end();
+      mesh.material.uniforms.u_time.value = clock.getElapsedTime();
+    });
+   }, 10);

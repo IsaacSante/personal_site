@@ -8,10 +8,9 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
-    "shader-park-core": "https://github.com/shader-park/shader-park-core.git",
     "stats.js": "^0.17.0",
     "three": "^0.122.0"
   },

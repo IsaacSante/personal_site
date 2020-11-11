@@ -34,9 +34,8 @@ import {
   }
 
   let uniforms;
-  let container, container2, scene, scene2, camera, camera2, renderer, renderer2,  controls, mesh, clock, mesh2, time, geometry, wireGeo, line, material;
+  let container, container2, scene, scene2, camera, camera2, renderer, renderer2, mesh, clock, mesh2, time, geometry, wireGeo, line, material;
   let stats;
-  let sculpture;
 
   function init () {
     container = document.querySelector(".container");
@@ -46,6 +45,7 @@ import {
     clock = new Clock();
     createRenderer();
     createGeometry();
+
     // fetch('https://iyapo-repo.glitch.me/mynewdata', {
     //     mode: 'cors',
     //     headers: {
@@ -64,7 +64,6 @@ import {
     if(DEBUG) {
       window.scene = scene;
       window.camera = camera;
-      window.controls = controls;
       stats = Stats.default();
       document.body.appendChild( stats.dom );
   }
@@ -128,6 +127,7 @@ function createRenderer() {
 
       uniforms = {
         u_time: { value: 0.0 },
+        u_resolution: { value: { x: null, y: null } },
         colorA: {type: 'vec3', value: new Color(0x74ebd5)},
         colorB: {type: 'vec3', value: new Color(0xACB6E5)}
       };
@@ -140,17 +140,11 @@ function createRenderer() {
 
       mesh = new Mesh( geometry, material );
       mesh2 = new Mesh( geometry2, material );
-      // mesh2.name = 'Caption';
       scene.add( mesh );
       scene.add( mesh2 );
-      // var vertexDisplacement = new Float32Array(geometry.attributes.position.count); 
-      // for (var i=0; i < vertexDisplacement.length; i += 1){
-      //   vertexDisplacement[i] = Math.sin(i);
-      // }
-//  console.log(geometry.attributes);
-    //geometry.setAttribute('vertexDisplacement', new BufferAttribute (vertexDisplacement, 1));
-      //console.log(geometry.attributes);
+
     } );
+
     let geometry3 = new BoxBufferGeometry(7,7,7);
     geometry3.center();
     const material2 = new MeshLambertMaterial({
@@ -161,13 +155,9 @@ function createRenderer() {
       linewidth: 100, // in pixels
       //resolution:  // to be set by renderer, eventually
     } );
-
     wireGeo = new WireframeGeometry (geometry3, matLine)
     line = new LineSegments( wireGeo );
     scene2.add( line );
-
-
-
   }
 
  function animate(){
@@ -197,4 +187,4 @@ function createRenderer() {
       stats.end();
       mesh.material.uniforms.u_time.value = clock.getElapsedTime();
     });
-   }, 10);
+   }, 100);

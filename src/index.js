@@ -2,7 +2,8 @@ import {
     PerspectiveCamera,
     Scene,
     WebGLRenderer,
-    MeshLambertMaterial,
+    MeshBasicMaterial,
+    CanvasTexture,
     Mesh,
     Color,
     HemisphereLight,
@@ -34,7 +35,7 @@ import {
   }
 
   let uniforms;
-  let container, container2, scene, scene2, camera, camera2, renderer, renderer2, mesh, clock, mesh2, time, geometry, wireGeo, line, material;
+  let container, container2, scene, scene2, camera, camera2, renderer, renderer2, mesh, clock, mesh2, repoData, geometry, wireGeo, line, material, time, mesh3;
   let stats;
 
   function init () {
@@ -46,17 +47,19 @@ import {
     createRenderer();
     createGeometry();
 
-    // fetch('https://iyapo-repo.glitch.me/mynewdata', {
-    //     mode: 'cors',
-    //     headers: {
-    //       'Access-Control-Allow-Origin':'*'
-    //     }
-    // }).then(resp => resp.json())
-    // .then(data => {
-    //     repoData = data ;
-    //     repoLength = repoData.length;
-    //     createGeometries();
-    // }).catch(e => console.error(e));
+    fetch('https://isaac-repo.glitch.me/pages', {
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin':'*'
+        }
+    }).then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+        repoData = data ;
+        createProjecttGeometry();
+        // repoLength = repoData.length;
+        // createGeometries();
+    }).catch(e => console.error(e));
 
     createCamera();
     createLights();
@@ -67,7 +70,6 @@ import {
       stats = Stats.default();
       document.body.appendChild( stats.dom );
   }
-
   }
 
   function createCamera() {
@@ -110,7 +112,7 @@ function createRenderer() {
   function createGeometry() {
     var loader = new FontLoader();
     loader.load( 'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
-      geometry = new TextBufferGeometry( 'Isaac Sante', {
+      geometry = new TextBufferGeometry( 'I create', {
         font: font,
         size: 1.2,
         height: 0,
@@ -142,27 +144,57 @@ function createRenderer() {
       mesh2 = new Mesh( geometry2, material );
       scene.add( mesh );
       scene.add( mesh2 );
-
     } );
+  }
 
-    let geometry3 = new BoxBufferGeometry(7,7,7);
+  function createProjecttGeometry() {
+    let geometry3 = new BoxBufferGeometry(6,6,6);
     geometry3.center();
-    const material2 = new MeshLambertMaterial({
-      color: 0x7CFC00,
+
+      const ctx = document.createElement('canvas').getContext('2d');
+      ctx.font = '20pt Arial';
+      // context.fillStyle = 'black';
+      // context.textAlign = "center";
+      // context.textBaseline = "middle";
+      // context.fillText(new Date().getTime(), canvas.width / 2, canvas.height / 2);
+
+      ctx.fillStyle = 'white';
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText('hello world', ctx.canvas.width / 2, ctx.canvas.height / 2);
+      // ctx.fillStyle = 'red';
+      // ctx.fillRect(0, 0, 1, 1);
+      // ctx.strokeStyle = '#FFFF00';
+      // ctx.font = "30px Arial";
+      // ctx.fillText("Hello World", 10, 50); 
+      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      const texture = new CanvasTexture(ctx.canvas);
+
+
+    const materialLast = new MeshBasicMaterial({
+      map: texture,
     });
-    let matLine = new LineBasicMaterial( {
-      color: 0xACB6E5,
-      linewidth: 100, // in pixels
-      //resolution:  // to be set by renderer, eventually
-    } );
-    wireGeo = new WireframeGeometry (geometry3, matLine)
-    line = new LineSegments( wireGeo );
-    scene2.add( line );
+
+    mesh3 = new Mesh(geometry3, materialLast );
+    scene2.add(mesh3)
+    // let matLine = new LineBasicMaterial( {
+    //   color: 0xACB6E5,
+    //   linewidth: 100, // in pixels
+    //   //resolution:  // to be set by renderer, eventually
+    // } );
+
+    // wireGeo = new WireframeGeometry (geometry3, matLine)
+    // line = new LineSegments( wireGeo );
+    // scene2.add( line );
+
+
   }
 
  function animate(){
-   line.rotation.x += 0.005;
-   line.rotation.y += 0.005;
+  //  line.rotation.x += 0.005;
+  //  line.rotation.y += 0.005;
+  // mesh3.rotation.x += 0.005;
+  // mesh3.rotation.y += 0.005;
 }
 
 // function onWindowResize() {
@@ -187,4 +219,4 @@ function createRenderer() {
       stats.end();
       mesh.material.uniforms.u_time.value = clock.getElapsedTime();
     });
-   }, 100);
+   }, 1000);

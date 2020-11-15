@@ -6,8 +6,16 @@
 }
 
 body {
-    background-color: #101010;
+    background-color: #1B2735;
     color: white;
+}
+
+#circle{
+  width: 80px;
+  height: 80px;
+  border: 1px solid #3c2946;
+  position: fixed;
+  border-radius:50%;
 }
 
 li, a {
@@ -17,6 +25,14 @@ li, a {
     color: #edf0f1;
     text-decoration: none;
 }
+
+.logo {
+    cursor:pointer;
+    padding: 10px 20px;
+    width:4em;
+    margin-right: auto;
+}
+
 
 .container {
 height: 100vh;
@@ -62,15 +78,8 @@ header {
 }
 
 button {
-    
+
 }
-
-
-
-
-
-
-
 
 
 footer {

@@ -270,3 +270,40 @@ h3{
     color: #FFF;
     text-decoration: none;
 }
+
+main{
+    grid-area:main;
+}
+#sidebar{
+grid-area:sidebar;
+}
+#content1{
+    grid-area:content1;
+}
+#content2{
+        grid-area:content2;
+}
+
+#content3{
+        grid-area:content3;
+}
+
+footer{
+    grid-area:footer;
+} 
+
+@media only screen and (max-width:550px) {
+.infoContainer{
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
+    grid-template-areas:
+    "nav"
+    "sidebar"
+    "main"
+    "content1"
+    "content2"
+    "content3"
+    "footer";
+
+}
+} 

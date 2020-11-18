@@ -19,30 +19,24 @@ import {
     Vector2,
     BufferAttribute,
     BoxBufferGeometry,
-    WireframeGeometry,
-    LineBasicMaterial,
-    LineSegments,
   } from "three";
-  // import { Wireframe } from './jsm/lines/Wireframe.js';
-  // import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
   import * as Stats from 'stats.js';
   import fragmentShader from "./shaders/fragment.glsl"
   import vertexShader from "./shaders/vertex.glsl";
   import * as THREE from 'three'; //REMOVE this in production
+
   const DEBUG = true; // Set to false in production
   if(DEBUG) {
       window.THREE = THREE;
   }
-
   let uniforms;
-  let container, container2, scene, scene2, camera, camera2, renderer, renderer2, mesh, clock, mesh2, repoData, geometry, wireGeo, line, material, time, mesh3;
+  let container, container2, scene, scene2, camera, camera2, renderer, renderer2, mesh, clock, mesh2, repoData, geometry, geometry2, material, time, mesh3;
   let stats;
-
   function init () {
     container = document.querySelector(".container");
     container2 = document.querySelector(".container-work");
     scene = new Scene();
-    scene2 = new Scene();
+    // scene2 = new Scene();
     clock = new Clock();
     createRenderer();
     createGeometry();
@@ -56,7 +50,7 @@ import {
     .then(data => {
       console.log(data)
         repoData = data ;
-        createProjecttGeometry();
+        // createProjecttGeometry();
         // repoLength = repoData.length;
         // createGeometries();
     }).catch(e => console.error(e));
@@ -79,6 +73,7 @@ import {
     camera.position.set(0, -0.5, 3);
     camera2 = new PerspectiveCamera(1, aspect2, 0.1, 1100);
     camera2.position.set(0, 0, 1000);
+
 }
 
 function createLights() {
@@ -86,7 +81,7 @@ function createLights() {
     directionalLight.position.set(5, 5, 10);
     const hemisphereLight = new HemisphereLight(0xddeeff, 0x202020, 3);
     scene.add(directionalLight, hemisphereLight);
-    scene2.add(directionalLight, hemisphereLight);
+    // scene2.add(directionalLight, hemisphereLight);
 }
 
 
@@ -97,22 +92,23 @@ function createRenderer() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.physicallyCorrectLights = true;
     container.appendChild(renderer.domElement);
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    renderer2 = new WebGLRenderer({ antialias: true, alpha: true});
-    renderer2.setClearColor( 0x000000, 0 );
-    renderer2.setSize(container2.clientWidth, container2.clientHeight);
-    renderer2.setPixelRatio(window.devicePixelRatio);
-    renderer2.physicallyCorrectLights = true;
-    container2.appendChild(renderer2.domElement);
-    renderer2.setPixelRatio(window.devicePixelRatio);
-
+    // renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(window.devicePixelRatio || 1);
+  //  const composer = new EffectComposer(renderer);
+  // composer.addPass(new RenderPass(scene, camera));
+    // renderer2 = new WebGLRenderer({ antialias: true, alpha: true});
+    // renderer2.setClearColor( 0x000000, 0 );
+    // renderer2.setSize(container2.clientWidth, container2.clientHeight);
+    // renderer2.setPixelRatio(window.devicePixelRatio);
+    // renderer2.physicallyCorrectLights = true;
+    // container2.appendChild(renderer2.domElement);
+    // renderer2.setPixelRatio(window.devicePixelRatio);
 }
 
-  function createGeometry() {
-    var loader = new FontLoader();
+function createGeometry() {
+var loader = new FontLoader();
     loader.load( 'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
-      geometry = new TextBufferGeometry( 'I create', {
+      geometry = new TextBufferGeometry( 'Isaac Sante', {
         font: font,
         size: 1.2,
         height: 0,
@@ -170,23 +166,12 @@ function createRenderer() {
       ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       const texture = new CanvasTexture(ctx.canvas);
 
-
     const materialLast = new MeshBasicMaterial({
       map: texture,
     });
 
     mesh3 = new Mesh(geometry3, materialLast );
     scene2.add(mesh3)
-    // let matLine = new LineBasicMaterial( {
-    //   color: 0xACB6E5,
-    //   linewidth: 100, // in pixels
-    //   //resolution:  // to be set by renderer, eventually
-    // } );
-
-    // wireGeo = new WireframeGeometry (geometry3, matLine)
-    // line = new LineSegments( wireGeo );
-    // scene2.add( line );
-
 
   }
 
@@ -209,14 +194,26 @@ function createRenderer() {
 // }
 
 // window.addEventListener("resize", onWindowResize, false);
+
+
+
+function resize () {
+  renderer.width = container.clientWidth;
+  renderer.height = container.clientHeight;
+  renderer.setSize(renderer.width, renderer.height);
+  camera.aspect = renderer.width / renderer.height;
+  camera.updateProjectionMatrix();
+}
+
+
   init();
   setTimeout(function() { 
     renderer.setAnimationLoop(() => {
       stats.begin();
       animate();
       renderer.render(scene, camera);
-      renderer2.render(scene2, camera2);
+      // renderer2.render(scene2, camera2);
       stats.end();
-      mesh.material.uniforms.u_time.value = clock.getElapsedTime();
+    mesh.material.uniforms.u_time.value = clock.getElapsedTime();
     });
    }, 1000);

@@ -54,7 +54,7 @@ import {
     }).catch(e => console.error(e));
     createCamera();
     createLights();
-    backgroundGeometry();
+    // backgroundGeometry();
     if(DEBUG) {
       window.scene = scene;
       window.camera = camera;

@@ -104833,8 +104833,7 @@ function init() {
     return console.error(e);
   });
   createCamera();
-  createLights();
-  backgroundGeometry();
+  createLights(); // backgroundGeometry();
 
   if (DEBUG) {
     window.scene = scene;
@@ -105001,7 +105000,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53623" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61963" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -54,7 +54,6 @@ import {
     }).catch(e => console.error(e));
     createCamera();
     createLights();
-    // backgroundGeometry();
     if(DEBUG) {
       window.scene = scene;
       window.camera = camera;
@@ -142,17 +141,6 @@ function createGeometry(record) {
     }
 }
 
-  // function backgroundGeometry() {
-  //   let radius = params.boundingSphere;
-  //   let spCode = `
-  //   sphere(.9);
-  //   `;
-  //    mesh = createSculpture(spCode, () => ({
-  //       'time': time
-  //   }), {radius: 2});
-  //   scene.add(mesh);
-  // }
-
   let canvasElement = document.getElementById('container');
   if (canvasElement) {
   canvasElement.addEventListener("click", () => {
@@ -168,6 +156,7 @@ function createGeometry(record) {
 //   // renderer.setSize(container.clientWidth, container.clientHeight);
 // }
 // window.addEventListener("resize", resize, false);
+
   init();
   setTimeout(function() { 
     renderer.setAnimationLoop(() => {

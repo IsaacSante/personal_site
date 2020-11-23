@@ -7,8 +7,8 @@
   "author": "Isaac Sante <43215955+IsaacSante@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel index.html ",
+    "build": "parcel build index.html --public-url ./"
   },
   "dependencies": {
     "shader-park-core": "https://github.com/shader-park/shader-park-core",

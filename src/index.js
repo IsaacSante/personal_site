@@ -158,7 +158,7 @@ function createGeometry(record) {
 
   init();
 
-  
+
   setTimeout(function() { 
     renderer.setAnimationLoop(() => {
       // stats.begin();

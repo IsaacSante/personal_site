@@ -9,17 +9,9 @@ body {
     background-color: #1B2735;
     color: #FFFEF2;
     font-family: 'Montserrat', sans-serif;
-    font-size: 150%;
+    font-size: 130%;
 }
-.qr {
-    top: 0;
-    right: 0;
-    position: absolute;
-        mix-blend-mode: screen;
-        width: 5em;
-        opacity: 5%
-    
-}
+
   #spinner{
     visibility: visible;
     width: 10em;
@@ -198,6 +190,34 @@ h3{
     font-size: 1.5rem;
 }
 
+.ProjectName{
+-webkit-text-stroke-width: .125rem;
+-webkit-text-fill-color: transparent;
+-webkit-text-stroke-color: #eee;
+font-size: 7rem;
+width:50%;
+padding:1%;
+}
+
+.Subtitle {
+    padding:1%;
+}
+
+.Main-Category{
+padding:1%;
+}
+
+.Description {
+    padding:1%;
+font-weight: lighter;
+line-height: 150%;
+width:80%
+}
+
+.Role {
+        padding:1%;
+}
+
 @media (max-width: 30em) {
   header {
       justify-content: start;
@@ -226,5 +246,13 @@ li, a {
        margin: 0 auto;
        padding:.2em;
 }
+.ProjectName{
+font-size: 4rem;
+width:100%
+}
+.Description {
+width:100%
+}
+
 }
 

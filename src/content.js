@@ -23,4 +23,5 @@ fetch('https://isaac-repo.glitch.me/pages', {
         Psub.innerHTML = record[0].Subtitle;
         Pcat.innerHTML = record[0]["Main Category"];
         Pdesc.innerHTML = record[0].Description  
+        Prole.innerHTML = record[0].Role;
  }

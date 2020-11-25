@@ -147,6 +147,7 @@ function createInterface(record) {
   Psub.innerHTML = record[0].Subtitle;
   Pcat.innerHTML = record[0]["Main Category"];
   Pdesc.innerHTML = record[0].Description;
+  Prole.innerHTML = record[0].Role;
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -176,7 +177,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61856" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55657" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

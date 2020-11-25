@@ -104927,18 +104927,27 @@ if (canvasElement) {
 //   renderer.setSize(container.clientWidth, container.clientHeight);
 // }
 // window.addEventListener("resize", resize, false);
+// function detectmob() { 
+//  if( navigator.userAgent.match(/Android/i)
+//  || navigator.userAgent.match(/webOS/i)
+//  || navigator.userAgent.match(/iPhone/i)
+//  || navigator.userAgent.match(/iPad/i)
+//  || navigator.userAgent.match(/iPod/i)
+//  || navigator.userAgent.match(/BlackBerry/i)
+//  || navigator.userAgent.match(/Windows Phone/i)
+//  ){
+//     return true;
+//   }
+//   camera.aspect = container.clientWidth / container.clientHeight;
+//   camera.position.z = innerWidth / 50
+//   camera.updateProjectionMatrix();
+//   renderer.setSize(container.clientWidth, container.clientHeight);
+// }
+// camera.aspect = container.clientWidth / container.clientHeight;
+// camera.position.z = innerWidth / 50
+// camera.updateProjectionMatrix();
+// renderer.setSize(container.clientWidth, container.clientHeight);
 
-
-function detectmob() {
-  if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
-    return true;
-  }
-
-  camera.aspect = container.clientWidth / container.clientHeight;
-  camera.position.z = innerWidth / 50;
-  camera.updateProjectionMatrix();
-  renderer.setSize(container.clientWidth, container.clientHeight);
-}
 
 init();
 setTimeout(function () {
@@ -104949,7 +104958,41 @@ setTimeout(function () {
 
     mesh.material.uniforms.u_time.value = clock.getElapsedTime();
   });
-}, 2000);
+}, 2000); //    if (window.attachEvent) {
+//   window.attachEvent('onresize', function() {
+//     if (window.innerWidth < 760)
+//       console.log("Less than 760" + 'no aqui');
+//     else
+//       console.log("More than 760");
+//   });
+// } else if 
+// (window.addEventListener) {
+//   window.addEventListener('resize', function() {
+//     if (window.innerWidth < 760)
+//       console.log("Less than 760");
+//     else
+//       console.log("More than 760");
+//   }, true);
+// } else {
+//   //The browser does not support Javascript event binding
+// }
+
+console.log(camera.position.z);
+window.addEventListener('resize', resize);
+
+function resize() {
+  if (window.innerWidth < 700) {
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.position.z = innerWidth / 50;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  } else {
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.position.z = 3;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  }
+}
 },{"three":"node_modules/three/build/three.module.js","stats.js":"node_modules/stats.js/build/stats.min.js","./shaders/fragment.glsl":"src/shaders/fragment.glsl","./shaders/vertex.glsl":"src/shaders/vertex.glsl","./helpers.js":"src/helpers.js","shader-park-core":"node_modules/shader-park-core/dist/shader-park-core.umd.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -104978,7 +105021,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58008" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60228" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -36632,15 +36632,13 @@ u(++l%c.children.length)},!1);var k=(performance||Date).now(),g=k,a=0,r=e(new f.
 b.fillRect(d,m,n,p);b.fillStyle=l;b.globalAlpha=.9;b.fillRect(d,m,n,p);return{dom:q,update:function(h,w){c=Math.min(c,h);k=Math.max(k,h);b.fillStyle=l;b.globalAlpha=1;b.fillRect(0,0,r,m);b.fillStyle=f;b.fillText(g(h)+" "+e+" ("+g(c)+"-"+g(k)+")",t,v);b.drawImage(q,d+a,m,n-a,p,d,m,n-a,p);b.fillRect(d+n-a,m,a,p);b.fillStyle=l;b.globalAlpha=.9;b.fillRect(d+n-a,m,a,g((1-h/w)*p))}}};return f});
 
 },{}],"src/shaders/fragment.glsl":[function(require,module,exports) {
-module.exports = `
-    uniform float u_time;
-      uniform vec3 colorA; 
-      uniform vec3 colorB; 
-      varying vec3 vUv;
+module.exports = `    uniform float u_time;
+    uniform vec3 colorA; 
+    uniform vec3 colorB; 
+    varying vec3 vUv;
     uniform vec2 u_resolution;
     void main() {
     vec2 uv = gl_FragCoord.xy / u_resolution;
-
         gl_FragColor = vec4(mix(sin(u_time * 0.8) + colorA , sin(u_time * 0.8) + colorB, vUv.x), 1.0);
       }
 
@@ -36651,28 +36649,7 @@ module.exports = `varying vec3 vUv;
       vUv = position; 
       vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
       gl_Position = projectionMatrix * modelViewPosition; 
-    }
-
-// precision mediump float;
-// 			precision mediump int;
-
-// 			uniform mat4 modelViewMatrix; // optional
-// 			uniform mat4 projectionMatrix; // optional
-
-// 			attribute vec3 position;
-// 			attribute vec4 color;
-
-// 			varying vec3 vPosition;
-// 			varying vec4 vColor;
-
-// 			void main()	{
-
-// 				vPosition = position;
-// 				vColor = color;
-
-// 				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-// 			}`
+    }`
 },{}],"src/helpers.js":[function(require,module,exports) {
 "use strict";
 
@@ -104807,8 +104784,8 @@ var stats;
 
 function init() {
   container = document.querySelector(".container");
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x1B2735);
+  scene = new THREE.Scene(); // scene.background = new Color( 0x1B2735);
+
   clock = new THREE.Clock();
   time = 0;
   createRenderer();
@@ -104833,13 +104810,12 @@ function init() {
     return console.error(e);
   });
   createCamera();
-  createLights(); // backgroundGeometry();
+  createLights();
 
   if (DEBUG) {
     window.scene = scene;
-    window.camera = camera;
-    stats = Stats.default();
-    document.body.appendChild(stats.dom);
+    window.camera = camera; // stats = Stats.default();
+    // document.body.appendChild( stats.dom );
   }
 }
 
@@ -104874,17 +104850,18 @@ function createGeometry(record) {
   loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
     geometry = new THREE.TextBufferGeometry(globalString, {
       font: font,
-      size: 0.8,
+      size: 1,
       height: 0
     });
     geometry.center();
+    geometry.translate(0, 1, 0);
     geometry2 = new THREE.TextBufferGeometry(globalSubtitle, {
       font: font,
       size: 0.15,
       height: 0
     });
     geometry2.center();
-    geometry2.translate(0, -1, 0);
+    geometry2.translate(0, 0, 0);
     uniforms = {
       u_time: {
         value: 0.0
@@ -104934,17 +104911,7 @@ function uniformUpdateCallback() {
     time: time,
     _scale: _helpers.params.sdfScale
   };
-} // function backgroundGeometry() {
-//   let radius = params.boundingSphere;
-//   let spCode = `
-//   sphere(.9);
-//   `;
-//    mesh = createSculpture(spCode, () => ({
-//       'time': time
-//   }), {radius: 2});
-//   scene.add(mesh);
-// }
-
+}
 
 var canvasElement = document.getElementById('container');
 
@@ -104954,24 +104921,35 @@ if (canvasElement) {
   });
 } // function resize () {
 // //real code below
-//   // camera.aspect = container.clientWidth / container.clientHeight;
-//   // camera.position.z = innerWidth / 60
-//   // camera.updateProjectionMatrix();
-//   // renderer.setSize(container.clientWidth, container.clientHeight);
+//   camera.aspect = container.clientWidth / container.clientHeight;
+//   camera.position.z = innerWidth / 50
+//   camera.updateProjectionMatrix();
+//   renderer.setSize(container.clientWidth, container.clientHeight);
 // }
 // window.addEventListener("resize", resize, false);
 
 
+function detectmob() {
+  if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+    return true;
+  }
+
+  camera.aspect = container.clientWidth / container.clientHeight;
+  camera.position.z = innerWidth / 50;
+  camera.updateProjectionMatrix();
+  renderer.setSize(container.clientWidth, container.clientHeight);
+}
+
 init();
 setTimeout(function () {
   renderer.setAnimationLoop(function () {
-    stats.begin(); // animate();
+    // stats.begin();
+    // animate();
+    renderer.render(scene, camera); // stats.end();
 
-    renderer.render(scene, camera);
-    stats.end();
     mesh.material.uniforms.u_time.value = clock.getElapsedTime();
   });
-}, 1000);
+}, 2000);
 },{"three":"node_modules/three/build/three.module.js","stats.js":"node_modules/stats.js/build/stats.min.js","./shaders/fragment.glsl":"src/shaders/fragment.glsl","./shaders/vertex.glsl":"src/shaders/vertex.glsl","./helpers.js":"src/helpers.js","shader-park-core":"node_modules/shader-park-core/dist/shader-park-core.umd.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -105000,7 +104978,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61963" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58008" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

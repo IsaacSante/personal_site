@@ -33,7 +33,7 @@ import {
   function init () {
     container = document.querySelector(".container");
     scene = new Scene();
-    scene.background = new Color( 0x1B2735);
+    // scene.background = new Color( 0x1B2735);
     clock = new Clock();
     time = 0;
     createRenderer();
@@ -57,8 +57,8 @@ import {
     if(DEBUG) {
       window.scene = scene;
       window.camera = camera;
-      stats = Stats.default();
-      document.body.appendChild( stats.dom );
+      // stats = Stats.default();
+      // document.body.appendChild( stats.dom );
   }
  }
 
@@ -90,18 +90,18 @@ function createGeometry(record) {
     loader.load( 'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
       geometry = new TextBufferGeometry(globalString, {
         font: font,
-        size: 0.8,
+        size: 1,
         height: 0,
       } );
       geometry.center();
-
+      geometry.translate( 0, 1, 0);
       geometry2 = new TextBufferGeometry(globalSubtitle, {
         font: font,
         size: 0.15,
         height: 0,
       } );
       geometry2.center();
-      geometry2.translate( 0, -1, 0);
+      geometry2.translate( 0, 0, 0);
       uniforms = {
         u_time: { value: 0.0 },
         u_resolution: { value: { x: null, y: null } },
@@ -113,7 +113,6 @@ function createGeometry(record) {
         vertexShader: vertexShader,
         fragmentShader: fragmentShader
       });
-
       mesh = new Mesh(geometry, material);
       mesh2 = new Mesh(geometry2, material);
       scene.add(mesh);
@@ -150,20 +149,40 @@ function createGeometry(record) {
 
 // function resize () {
 // //real code below
-//   // camera.aspect = container.clientWidth / container.clientHeight;
-//   // camera.position.z = innerWidth / 60
-//   // camera.updateProjectionMatrix();
-//   // renderer.setSize(container.clientWidth, container.clientHeight);
+//   camera.aspect = container.clientWidth / container.clientHeight;
+//   camera.position.z = innerWidth / 50
+//   camera.updateProjectionMatrix();
+//   renderer.setSize(container.clientWidth, container.clientHeight);
 // }
 // window.addEventListener("resize", resize, false);
 
+
+function detectmob() { 
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    return true;
+  }
+  camera.aspect = container.clientWidth / container.clientHeight;
+  camera.position.z = innerWidth / 50
+  camera.updateProjectionMatrix();
+  renderer.setSize(container.clientWidth, container.clientHeight);
+}
+
+
   init();
+
   setTimeout(function() { 
     renderer.setAnimationLoop(() => {
-      stats.begin();
+      // stats.begin();
       // animate();
       renderer.render(scene, camera);
-      stats.end();
+      // stats.end();
       mesh.material.uniforms.u_time.value = clock.getElapsedTime();
     });
-   }, 1000);
+   }, 2000);

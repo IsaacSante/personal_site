@@ -35,8 +35,16 @@ import {
     scene = new Scene();
     // scene.background = new Color( 0x1B2735);
     clock = new Clock();
+    // let timeDom = document.getElementById("time");
+    // timeDom.innerHTML = clock.getElapsedTime();
+    // console.log(timeDom)
+
     time = 0;
     createRenderer();
+     const spinner = document.getElementById("spinner");
+      function hideSpinner() {
+      spinner.classList.add("hide");
+   }
     fetch('https://isaac-repo.glitch.me/pages', {
         mode: 'cors',
         headers: {
@@ -50,6 +58,7 @@ import {
         globalString = record['Project Name'];
         globalSubtitle = record.Subtitle;
         globalURL = 'content.html?' + record.Slug;
+        hideSpinner();
         createGeometry(record);
     }).catch(e => console.error(e));
     createCamera();
@@ -90,7 +99,7 @@ function createGeometry(record) {
     loader.load( 'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
       geometry = new TextBufferGeometry(globalString, {
         font: font,
-        size: 1,
+        size: 0.75,
         height: 0,
       } );
       geometry.center();
@@ -147,42 +156,9 @@ function createGeometry(record) {
   });
   }
 
-// function resize () {
-// //real code below
-//   camera.aspect = container.clientWidth / container.clientHeight;
-//   camera.position.z = innerWidth / 50
-//   camera.updateProjectionMatrix();
-//   renderer.setSize(container.clientWidth, container.clientHeight);
-// }
-// window.addEventListener("resize", resize, false);
-
-
-// function detectmob() { 
-//  if( navigator.userAgent.match(/Android/i)
-//  || navigator.userAgent.match(/webOS/i)
-//  || navigator.userAgent.match(/iPhone/i)
-//  || navigator.userAgent.match(/iPad/i)
-//  || navigator.userAgent.match(/iPod/i)
-//  || navigator.userAgent.match(/BlackBerry/i)
-//  || navigator.userAgent.match(/Windows Phone/i)
-//  ){
-//     return true;
-//   }
-//   camera.aspect = container.clientWidth / container.clientHeight;
-//   camera.position.z = innerWidth / 50
-//   camera.updateProjectionMatrix();
-//   renderer.setSize(container.clientWidth, container.clientHeight);
-// }
-
-
-  // camera.aspect = container.clientWidth / container.clientHeight;
-  // camera.position.z = innerWidth / 50
-  // camera.updateProjectionMatrix();
-  // renderer.setSize(container.clientWidth, container.clientHeight);
-
-
   init();
 
+  
   setTimeout(function() { 
     renderer.setAnimationLoop(() => {
       // stats.begin();
@@ -191,35 +167,13 @@ function createGeometry(record) {
       // stats.end();
       mesh.material.uniforms.u_time.value = clock.getElapsedTime();
     });
-   }, 2000);
-
-
-//    if (window.attachEvent) {
-//   window.attachEvent('onresize', function() {
-//     if (window.innerWidth < 760)
-//       console.log("Less than 760" + 'no aqui');
-//     else
-//       console.log("More than 760");
-//   });
-// } else if 
-
-// (window.addEventListener) {
-//   window.addEventListener('resize', function() {
-//     if (window.innerWidth < 760)
-//       console.log("Less than 760");
-//     else
-//       console.log("More than 760");
-//   }, true);
-// } else {
-//   //The browser does not support Javascript event binding
-// }
+   }, 1000);
 
 console.log(camera.position.z)
 
 window.addEventListener('resize', resize);
 
 function resize() {
-
     if (window.innerWidth < 700) {
   camera.aspect = container.clientWidth / container.clientHeight;
   camera.position.z = innerWidth / 50

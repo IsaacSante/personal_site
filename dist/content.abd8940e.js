@@ -130,24 +130,32 @@ fetch('https://isaac-repo.glitch.me/pages', {
   searchParam = searchParam.substring(1);
   var record = data.filter(function (child) {
     return child.Slug == searchParam;
-  });
+  }); // console.log(record)
+
   createInterface(record);
 }).catch(function (e) {
   return console.error(e);
 });
 
 function createInterface(record) {
-  console.log(record);
   var Pname = document.getElementById("ProjectName");
-  var Psub = document.getElementById("Subtitle");
-  var Pcat = document.getElementById("Main-Category");
+  var Psub = document.getElementById("Subtitle"); //  let Pcat = document.getElementById("Main-Category");
+
   var Pdesc = document.getElementById("Description");
   var Prole = document.getElementById("Role");
   Pname.innerHTML = record[0]["Project Name"];
-  Psub.innerHTML = record[0].Subtitle;
-  Pcat.innerHTML = record[0]["Main Category"];
+  Psub.innerHTML = record[0].Subtitle; // Pcat.innerHTML = record[0]["Main Category"];
+
   Pdesc.innerHTML = record[0].Description;
-  Prole.innerHTML = record[0].Role;
+  Prole.innerHTML = 'Role: ' + record[0].Role; // console.log(record[0].Img1[i].url)
+
+  var imgLength = record[0].Img1.length;
+
+  for (i = 0; i < imgLength; i++) {
+    var img = document.createElement('img');
+    img.src = record[0].Img1[i].url;
+    document.getElementById('img-handler').appendChild(img);
+  }
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -177,7 +185,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55657" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64417" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

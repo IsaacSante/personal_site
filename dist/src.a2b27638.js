@@ -104781,23 +104781,22 @@ var uniforms;
 var container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
 var globalString, globalSubtitle, globalURL;
 var stats;
+var textSize1, textSize2;
 
 function init() {
   container = document.querySelector(".container");
-  scene = new THREE.Scene(); // scene.background = new Color( 0x1B2735);
-
-  clock = new THREE.Clock(); // let timeDom = document.getElementById("time");
-  // timeDom.innerHTML = clock.getElapsedTime();
-  // console.log(timeDom)
-
-  time = 0;
-  createRenderer();
+  scene = new THREE.Scene();
+  clock = new THREE.Clock();
   var spinner = document.getElementById("spinner");
 
   function hideSpinner() {
     spinner.classList.add("hide");
   }
 
+  time = 0;
+  textSize1 = 0.75;
+  textSize2 = 0.15;
+  createRenderer();
   fetch('https://isaac-repo.glitch.me/pages', {
     mode: 'cors',
     headers: {
@@ -104813,12 +104812,12 @@ function init() {
     record = repoData[pIndex];
     globalString = record['Project Name'];
     globalSubtitle = record.Subtitle;
-    globalURL = 'content.html?' + record.Slug;
-    hideSpinner();
+    globalURL = '#';
     createGeometry(record);
   }).catch(function (e) {
     return console.error(e);
   });
+  hideSpinner();
   createCamera();
   createLights();
 
@@ -104860,18 +104859,18 @@ function createGeometry(record) {
   loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
     geometry = new THREE.TextBufferGeometry(globalString, {
       font: font,
-      size: 0.75,
+      size: 0.8,
       height: 0
     });
     geometry.center();
-    geometry.translate(0, 1, 0);
+    geometry.translate(0, 0, 0);
     geometry2 = new THREE.TextBufferGeometry(globalSubtitle, {
       font: font,
       size: 0.15,
       height: 0
     });
     geometry2.center();
-    geometry2.translate(0, 0, 0);
+    geometry2.translate(0, -1, 0);
     uniforms = {
       u_time: {
         value: 0.0
@@ -104900,7 +104899,19 @@ function createGeometry(record) {
     mesh2 = new THREE.Mesh(geometry2, material);
     scene.add(mesh);
     scene.add(mesh2);
-  });
+  }); // var imgLoader = new TextureLoader();
+  // console.log(record)
+  // // Load an image file into a custom material
+  // var imgmaterial = new THREE.MeshLambertMaterial({
+  //   map: loader.load('https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg')
+  // });
+  // // create a plane geometry for the image with a width of 10
+  // // and a height that preserves the image's aspect ratio
+  // var imggeometry = new PlaneGeometry(10, 10*.75);
+  // // combine our image geometry and material into a mesh
+  // var imgmesh = new Mesh(imggeometry, imgmaterial);
+  // // set the position of the image mesh in the x,y,z dimensions
+  // imgmesh.position.set(0,0,0)
 }
 
 var btnElement = document.getElementById('next');
@@ -104912,7 +104923,15 @@ btnElement.addEventListener("click", function () {
   record = repoData[pIndex];
   globalString = record['Project Name'];
   globalSubtitle = record.Subtitle;
-  globalURL = 'content.html?' + record.Slug;
+
+  if (pIndex > 0) {
+    globalURL = 'content.html?' + record.Slug;
+    btnElement.innerHTML = 'Next project';
+  } else {
+    btnElement.innerHTML = 'View projects';
+    globalURL = '#';
+  }
+
   createGeometry();
 });
 
@@ -104932,6 +104951,7 @@ if (canvasElement) {
 }
 
 init();
+var timetxt = document.getElementById("time");
 setTimeout(function () {
   renderer.setAnimationLoop(function () {
     // stats.begin();
@@ -104939,8 +104959,9 @@ setTimeout(function () {
     renderer.render(scene, camera); // stats.end();
 
     mesh.material.uniforms.u_time.value = clock.getElapsedTime();
+    timetxt.innerHTML = clock.getElapsedTime();
   });
-}, 1000);
+}, 2000);
 console.log(camera.position.z);
 window.addEventListener('resize', resize);
 
@@ -104950,11 +104971,21 @@ function resize() {
     camera.position.z = innerWidth / 50;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
+    textSize1 = 0.5;
+    textSize2 = 0.11; // scene.remove( mesh );
+    // scene.remove( mesh2 );
+    // scene.remove( mesh3 );
+    // createGeometry();
   } else {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.position.z = 3;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
+    textSize1 = 0.75;
+    textSize2 = 0.15; // scene.remove( mesh );
+    // scene.remove( mesh2 );
+    // scene.remove( mesh3 );
+    // createGeometry();
   }
 }
 },{"three":"node_modules/three/build/three.module.js","stats.js":"node_modules/stats.js/build/stats.min.js","./shaders/fragment.glsl":"src/shaders/fragment.glsl","./shaders/vertex.glsl":"src/shaders/vertex.glsl","./helpers.js":"src/helpers.js","shader-park-core":"node_modules/shader-park-core/dist/shader-park-core.umd.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -104985,7 +105016,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55657" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64417" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

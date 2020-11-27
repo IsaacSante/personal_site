@@ -104899,19 +104899,7 @@ function createGeometry(record) {
     mesh2 = new THREE.Mesh(geometry2, material);
     scene.add(mesh);
     scene.add(mesh2);
-  }); // var imgLoader = new TextureLoader();
-  // console.log(record)
-  // // Load an image file into a custom material
-  // var imgmaterial = new THREE.MeshLambertMaterial({
-  //   map: loader.load('https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg')
-  // });
-  // // create a plane geometry for the image with a width of 10
-  // // and a height that preserves the image's aspect ratio
-  // var imggeometry = new PlaneGeometry(10, 10*.75);
-  // // combine our image geometry and material into a mesh
-  // var imgmesh = new Mesh(imggeometry, imgmaterial);
-  // // set the position of the image mesh in the x,y,z dimensions
-  // imgmesh.position.set(0,0,0)
+  });
 }
 
 var btnElement = document.getElementById('next');
@@ -105016,7 +105004,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64417" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57455" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

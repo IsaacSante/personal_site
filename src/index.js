@@ -128,25 +128,6 @@ function createGeometry(record) {
       scene.add(mesh);
       scene.add(mesh2);
     } );
-
-    // var imgLoader = new TextureLoader();
-
-// console.log(record)
-// // Load an image file into a custom material
-// var imgmaterial = new THREE.MeshLambertMaterial({
-//   map: loader.load('https://s3.amazonaws.com/duhaime/blog/tsne-webgl/assets/cat.jpg')
-// });
-
-// // create a plane geometry for the image with a width of 10
-// // and a height that preserves the image's aspect ratio
-// var imggeometry = new PlaneGeometry(10, 10*.75);
-
-// // combine our image geometry and material into a mesh
-// var imgmesh = new Mesh(imggeometry, imgmaterial);
-
-// // set the position of the image mesh in the x,y,z dimensions
-// imgmesh.position.set(0,0,0)
-
   }
 
   let btnElement = document.getElementById('next');

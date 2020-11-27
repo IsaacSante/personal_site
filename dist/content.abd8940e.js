@@ -139,15 +139,18 @@ fetch('https://isaac-repo.glitch.me/pages', {
 
 function createInterface(record) {
   var Pname = document.getElementById("ProjectName");
+  var Pyear = document.getElementById("year");
   var Psub = document.getElementById("Subtitle"); //  let Pcat = document.getElementById("Main-Category");
 
   var Pdesc = document.getElementById("Description");
   var Prole = document.getElementById("Role");
+  var Pproccess = document.getElementById("extra-info");
   Pname.innerHTML = record[0]["Project Name"];
+  Pyear.innerHTML = record[0].Year;
   Psub.innerHTML = record[0].Subtitle; // Pcat.innerHTML = record[0]["Main Category"];
 
   Pdesc.innerHTML = record[0].Description;
-  Prole.innerHTML = 'Role: ' + record[0].Role; // console.log(record[0].Img1[i].url)
+  Prole.innerHTML = record[0].Role; // console.log(record[0].Img1[i].url)
 
   var imgLength = record[0].Img1.length;
 
@@ -155,6 +158,15 @@ function createInterface(record) {
     var img = document.createElement('img');
     img.src = record[0].Img1[i].url;
     document.getElementById('img-handler').appendChild(img);
+  }
+
+  Pproccess.innerHTML = record[0].Process;
+  var techLength = record[0].Technology.length;
+
+  for (i = 0; i < techLength; i++) {
+    var txtNode = document.createElement("P");
+    txtNode.innerHTML = record[0].Technology[i];
+    document.getElementById("tech-stack").appendChild(txtNode);
   }
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -185,7 +197,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64417" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57455" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

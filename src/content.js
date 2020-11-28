@@ -1,3 +1,4 @@
+let projectLocation, dataHandler, record;
 fetch('https://isaac-repo.glitch.me/pages', {
         mode: 'cors',
         headers: {
@@ -7,8 +8,10 @@ fetch('https://isaac-repo.glitch.me/pages', {
     .then(data => {
         let searchParam = document.location.search;
         searchParam = searchParam.substring(1);
-        let record = data.filter(child => child.Slug == searchParam);
-        // console.log(record)
+        record = data.filter(child => child.Slug == searchParam);
+        dataHandler = data;
+        projectLocation = dataHandler.findIndex(x => x.Slug === record[0].Slug)
+        console.log(projectLocation)
         createInterface(record)
     }).catch(e => console.error(e));
 
@@ -16,17 +19,16 @@ fetch('https://isaac-repo.glitch.me/pages', {
          let Pname = document.getElementById("ProjectName");
          let Pyear = document.getElementById("year");
          let Psub = document.getElementById("Subtitle");
-        //  let Pcat = document.getElementById("Main-Category");
          let Pdesc = document.getElementById("Description");
          let Prole = document.getElementById("Role");
          let Pproccess = document.getElementById("extra-info");
+         let PfinalProjectSrc = document.getElementById("live-link");
+         let nextProjectSrc = document.getElementById("next-work-link");
         Pname.innerHTML = record[0]["Project Name"];
         Pyear.innerHTML = record[0].Year;
         Psub.innerHTML = record[0].Subtitle;
-        // Pcat.innerHTML = record[0]["Main Category"];
         Pdesc.innerHTML = record[0].Description  
         Prole.innerHTML = record[0].Role;
-        // console.log(record[0].Img1[i].url)
         let imgLength = record[0].Img1.length
          for(i=0;i<imgLength;i++){
              var img = document.createElement('img'); 
@@ -40,5 +42,14 @@ fetch('https://isaac-repo.glitch.me/pages', {
             txtNode.innerHTML = record[0].Technology[i];
             document.getElementById("tech-stack").appendChild(txtNode); 
          }
-
+         PfinalProjectSrc.href = record[0]["Project Final Src"];
+         let nextProjectBtn = document.getElementById('nxt-project');
+         nextProjectBtn.addEventListener("click", () => {
+            projectLocation  = (projectLocation + 1) % dataHandler.length;
+            if (projectLocation === 0){
+                projectLocation = 1; 
+            }
+            var nextProjectHref = 'content.html?' + dataHandler[projectLocation].Slug;
+            nextProjectSrc.href = nextProjectHref
+        });
  }

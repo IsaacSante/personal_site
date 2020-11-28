@@ -115,12 +115,13 @@ justify-content: center;
 padding-bottom: 5rem;
 }
 
-.link-btns button {
+/* .link-btns button {
     padding: .2rem;
-}
+} */
 
 .live, .nxt-project {
-    font-size: 2.5rem;
+    padding: 1rem;
+    font-size: 2rem;
     position: relative;
 }
 
@@ -353,6 +354,7 @@ padding-top:10rem;
        margin: 0 auto;
        padding:.2em;
 } */
+
 
 @media (max-width: 30em) {
   body {

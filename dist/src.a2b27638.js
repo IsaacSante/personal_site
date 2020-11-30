@@ -112207,16 +112207,14 @@ init();
 var timetxt = document.getElementById("time");
 setTimeout(function () {
   renderer.setAnimationLoop(function () {
-    // stats.begin();
-    // animate();
-    renderer.render(scene, camera); // stats.end();
+    renderer.render(scene, camera);
 
-    if (mesh.material) {
+    if (mesh) {
       mesh.material.uniforms.uTime.value = clock.getElapsedTime();
     }
 
     var now = moment().tz("America/New_York").format('hh:mm:ss');
-    timetxt.innerHTML = now; // mesh3.rotation.z += Math.sin(clock.getElapsedTime()* 0.0001);
+    timetxt.innerHTML = now;
   });
 }, 2000);
 console.log(camera.position.z);
@@ -112273,7 +112271,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55145" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60385" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

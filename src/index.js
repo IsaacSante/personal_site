@@ -203,16 +203,12 @@ function createGeometry(record) {
   let timetxt = document.getElementById("time");
   setTimeout(function() { 
     renderer.setAnimationLoop(() => {
-      // stats.begin();
-      // animate();
       renderer.render(scene, camera);
-      // stats.end();
-      if (mesh.material) {
+      if (mesh) {
         mesh.material.uniforms.uTime.value = clock.getElapsedTime(); 
       }
       let now = moment().tz("America/New_York").format('hh:mm:ss')
       timetxt.innerHTML = now;
-      // mesh3.rotation.z += Math.sin(clock.getElapsedTime()* 0.0001);
     });
    }, 2000);
 

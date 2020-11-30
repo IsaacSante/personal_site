@@ -419,13 +419,13 @@ padding-top:10rem;
 .social svg{
     padding:.2rem;
 }
-svg {
+.social-svg {
 width: 5rem;
 height: 5rem;
 fill: white;
 }
 
-svg:hover {
+.social-svg:hover {
     fill: purple;
 }
 
@@ -441,25 +441,6 @@ padding-top: 1rem;
     padding-top:10rem;
 }
 
-/* .live, .nxt-project {
-    padding: 0;
-    border: none;
-    background: none;
-    z-index:100000;
-    bottom:0;
-    right:0;
-    text-decoration: none;
-    margin: .1em;
-    font-size: 4em;
-    background-color: transparent;
-    color: transparent;
-   -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color: white;  
-       font-size: 1.5em;
-       width: 50%;
-       margin: 0 auto;
-       padding:.2em;
-} */
 @media (max-width: 30em) {
   body {
    overflow: visible;

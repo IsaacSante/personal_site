@@ -1,4 +1,11 @@
-let projectLocation, dataHandler, record;
+  let projectLocation, dataHandler, record;
+  var moment = require('moment-timezone');
+  let timetxt = document.getElementById("time");
+  setInterval(function() { 
+      let now = moment().tz("America/New_York").format('hh:mm:ss')
+      timetxt.innerHTML = now;
+   }, 1000);
+   
 fetch('https://isaac-repo.glitch.me/pages', {
         mode: 'cors',
         headers: {

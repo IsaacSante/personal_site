@@ -6,34 +6,32 @@ import {
     Color,
     HemisphereLight,
     DirectionalLight,
-    DirectionalLightHelper,
     ShaderMaterial,
     Clock,
-    Vector2,
-    Vector3,
     FontLoader,
     TextBufferGeometry,
-    TextureLoader,
-    MeshLambertMaterial,
     PlaneGeometry,
+    TextureLoader,
+    MeshBasicMaterial,
   } from "three";
   import * as Stats from 'stats.js';
   import fragmentShader from "./shaders/fragment.glsl"
   import vertexShader from "./shaders/vertex.glsl";
   import * as THREE from 'three'; //REMOVE this in production
- import {lerp, params} from './helpers.js';
+  import {params} from './helpers.js';
   import {createSculpture} from 'shader-park-core';
+  var moment = require('moment-timezone');
 
   const DEBUG = true; // Set to false in production
   if(DEBUG) {
       window.THREE = THREE;
   }
   let uniforms;
-  let container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
-  let globalString, globalSubtitle, globalURL;
+  let container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, geoMask1, maskMat,maskFinal, clock, repoData, material, material2,  time, record, pIndex;
+  let globalString, globalSubtitle, globalURL, globalImg;
   let stats;
   let textSize1, textSize2;
-
+  // let intialImg = document.getElementById("initial-picture");
   function init () {
     container = document.querySelector(".container");
     scene = new Scene();
@@ -59,6 +57,8 @@ import {
         globalString = record['Project Name'];
         globalSubtitle = record.Subtitle;
         globalURL = '#'
+        globalImg = record.Img1[0].url
+        // intialImg.src = globalImg;
         createGeometry(record);
     }).catch(e => console.error(e));
     hideSpinner();
@@ -105,15 +105,24 @@ function createGeometry(record) {
       } );
       geometry.center();
       geometry.translate( 0, 0, 0);
+
+       geoMask1 = new TextBufferGeometry(globalString, {
+        font: font,
+        size: 0.899,
+        height: 0,
+      } );
+      geoMask1.center();
+      geoMask1.translate( 0, 0, 0.05);
+
       geometry2 = new TextBufferGeometry(globalSubtitle, {
         font: font,
-        size: 0.15,
+        size: 0.16,
         height: 0,
       } );
       geometry2.center();
       geometry2.translate( 0, -1, 0);
       uniforms = {
-        u_time: { value: 0.0 },
+        uTime: { value: 0.0 },
         u_resolution: { value: { x: null, y: null } },
         colorA: {type: 'vec3', value: new Color(0x74ebd5)},
         colorB: {type: 'vec3', value: new Color(0xACB6E5)}
@@ -121,29 +130,56 @@ function createGeometry(record) {
       material = new ShaderMaterial({
         uniforms: uniforms,
         vertexShader: vertexShader,
-        fragmentShader: fragmentShader
+        fragmentShader: fragmentShader,
+        opacity: 0.5,
+         transparent: true,
       });
+
+      maskMat = new MeshBasicMaterial({color: 0x687681,  transparent: true, opacity: 0.5,})
       mesh = new Mesh(geometry, material);
       mesh2 = new Mesh(geometry2, material);
+      maskFinal = new Mesh(geoMask1, maskMat)
       scene.add(mesh);
       scene.add(mesh2);
+      // scene.add(maskFinal);
     } );
+
+    // geometry3 = new PlaneGeometry(9.0, 6.0, 16, 16);
+    // geometry3.center();
+    // geometry3.translate( -0.2, -0.2, -1);
+    // let Newtexture = new TextureLoader().load(globalImg);
+    // material2 = new MeshBasicMaterial({ map: Newtexture, transparent: true, opacity: 0.3, });
+    // mesh3 = new Mesh(geometry3, material2);
+    // mesh3.rotation.y = Math.PI/18
+    // scene.add(mesh3);
   }
 
   let btnElement = document.getElementById('next');
+  let arrowAnimation = document.getElementById("arrowtxt");
+   function hideArrow() {
+      arrowAnimation.classList.add("hide");
+   }
+  function showArrow() {
+      arrowAnimation.classList.add("show");
+   }
   btnElement.addEventListener("click", () => {
       scene.remove( mesh );
       scene.remove( mesh2 );
       scene.remove( mesh3 );
+      scene.remove( maskFinal );
       pIndex = (pIndex + 1) % repoData.length;
       record = repoData[pIndex];
       globalString = record['Project Name'];
       globalSubtitle = record.Subtitle;
+      globalImg = record.Img1[0].url
+      // intialImg.src = globalImg;
       if(pIndex > 0){
+      showArrow();
       globalURL = 'content.html?' + record.Slug;
       btnElement.innerHTML = 'Next project'
       }else{
-      btnElement.innerHTML = 'View projects'
+      hideArrow();
+      btnElement.innerHTML = 'View work'
       globalURL = '#'
       }
       createGeometry();
@@ -162,18 +198,21 @@ function createGeometry(record) {
    window.location.href = globalURL;
   });
   }
-
   init();
-
-      let timetxt = document.getElementById("time");
+  
+  let timetxt = document.getElementById("time");
   setTimeout(function() { 
     renderer.setAnimationLoop(() => {
       // stats.begin();
       // animate();
       renderer.render(scene, camera);
       // stats.end();
-      mesh.material.uniforms.u_time.value = clock.getElapsedTime();
-      timetxt.innerHTML = clock.getElapsedTime();
+      if (mesh.material) {
+        mesh.material.uniforms.uTime.value = clock.getElapsedTime(); 
+      }
+      let now = moment().tz("America/New_York").format('hh:mm:ss')
+      timetxt.innerHTML = now;
+      // mesh3.rotation.z += Math.sin(clock.getElapsedTime()* 0.0001);
     });
    }, 2000);
 

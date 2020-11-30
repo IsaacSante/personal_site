@@ -11,6 +11,7 @@
     "build": "parcel build index.html --public-url ./"
   },
   "dependencies": {
+    "moment-timezone": "^0.5.32",
     "shader-park-core": "https://github.com/shader-park/shader-park-core",
     "stats.js": "^0.17.0",
     "three": "^0.122.0"

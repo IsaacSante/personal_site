@@ -31,7 +31,7 @@ import {
   let globalString, globalSubtitle, globalURL, globalImg;
   let stats;
   let textSize1, textSize2;
-  // let intialImg = document.getElementById("initial-picture");
+  let intialImg = document.getElementById("initial-picture");
   function init () {
     container = document.querySelector(".container");
     scene = new Scene();
@@ -58,7 +58,7 @@ import {
         globalSubtitle = record.Subtitle;
         globalURL = '#'
         globalImg = record.Img1[0].url
-        // intialImg.src = globalImg;
+        intialImg.src = globalImg;
         createGeometry(record);
     }).catch(e => console.error(e));
     hideSpinner();
@@ -172,7 +172,7 @@ function createGeometry(record) {
       globalString = record['Project Name'];
       globalSubtitle = record.Subtitle;
       globalImg = record.Img1[0].url
-      // intialImg.src = globalImg;
+      intialImg.src = globalImg;
       if(pIndex > 0){
       showArrow();
       globalURL = 'content.html?' + record.Slug;

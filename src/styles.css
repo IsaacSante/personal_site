@@ -229,7 +229,7 @@ header {
 .new-txt {
     position:absolute;
     z-index:100000000;
-    top:0;
+    bottom:0;
     margin-left: 10%;
     font-size: 1.8rem;
     mix-blend-mode: screen;
@@ -333,15 +333,15 @@ font-weight: lighter;
 .initial-picture{
   position:absolute;
   top:0;
-  left:0;
-  margin-left:10%;
+  right:0;
+  margin-right:10%;
   margin-top:15%;
   min-width:30rem;
   max-width:40rem;
   mix-blend-mode: exclusion;
-  opacity:100%;
+  opacity:50%;
 border: .1rem solid rgba(255, 255, 255, .1);
-  transform: rotate3d(1, 1, 1, -25deg);
+transform: rotate3d(1, 1, 1, 45deg);
   /* transition-duration: 1s;
   transition-delay: now;
   animation-timing-function: linear;

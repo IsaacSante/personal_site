@@ -210,7 +210,7 @@ function createGeometry(record) {
       let now = moment().tz("America/New_York").format('hh:mm:ss')
       timetxt.innerHTML = now;
     });
-   }, 2000);
+   }, 500);
 
 console.log(camera.position.z)
 

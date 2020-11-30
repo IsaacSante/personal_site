@@ -112216,7 +112216,7 @@ setTimeout(function () {
     var now = moment().tz("America/New_York").format('hh:mm:ss');
     timetxt.innerHTML = now;
   });
-}, 2000);
+}, 500);
 console.log(camera.position.z);
 window.addEventListener('resize', resize);
 
@@ -112271,7 +112271,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60385" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65350" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

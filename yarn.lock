@@ -3793,6 +3793,11 @@ parcel-bundler@*, parcel-bundler@^1.12.4:
     v8-compile-cache "^2.0.0"
     ws "^5.1.1"
 
+parcel-plugin-clean-dist@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-clean-dist/-/parcel-plugin-clean-dist-0.0.6.tgz#e3da68aaadc19b258c111fc114fe68e7866bf4fb"
+  integrity sha512-zzPY/ORCzkV+V7nfyYlONLrBithrx6orJjepdBoqqb9myeV9zQZUoBY41i3QkSSnQX7ilGmWDALX2XlxC6z7Fw==
+
 parcel-plugin-glsl@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/parcel-plugin-glsl/-/parcel-plugin-glsl-0.1.0.tgz#c1ad4a35dcbe98c5f8cc3c31762a02fd8d2ed3db"

@@ -13,14 +13,13 @@ import {
     PlaneGeometry,
     TextureLoader,
     MeshBasicMaterial,
+    SphereBufferGeometry,
+    MeshLambertMaterial,
+    BoxGeometry,
   } from "three";
-  import * as Stats from 'stats.js';
   import fragmentShader from "./shaders/fragment.glsl"
   import vertexShader from "./shaders/vertex.glsl";
   import * as THREE from 'three'; //REMOVE this in production
-  import {params} from './helpers.js';
-  import {createSculpture} from 'shader-park-core';
-  var moment = require('moment-timezone');
 
   const DEBUG = true; // Set to false in production
   if(DEBUG) {
@@ -29,9 +28,9 @@ import {
   let uniforms;
   let container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, geoMask1, maskMat,maskFinal, clock, repoData, material, material2,  time, record, pIndex;
   let globalString, globalSubtitle, globalURL, globalImg;
-  let stats;
   let textSize1, textSize2;
-  let intialImg = document.getElementById("initial-picture");
+  let myCoolBool = false;
+
   function init () {
     container = document.querySelector(".container");
     scene = new Scene();
@@ -57,18 +56,15 @@ import {
         globalString = record['Project Name'];
         globalSubtitle = record.Subtitle;
         globalURL = '#'
-        globalImg = record.Img1[0].url
-        intialImg.src = globalImg;
         createGeometry(record);
     }).catch(e => console.error(e));
     hideSpinner();
     createCamera();
     createLights();
+    // createDance();
     if(DEBUG) {
       window.scene = scene;
       window.camera = camera;
-      // stats = Stats.default();
-      // document.body.appendChild( stats.dom );
   }
  }
 
@@ -100,19 +96,11 @@ function createGeometry(record) {
     loader.load( 'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
       geometry = new TextBufferGeometry(globalString, {
         font: font,
-        size: 0.8,
+        size: 0.7,
         height: 0,
       } );
       geometry.center();
-      geometry.translate( 0, 0, 0);
-
-       geoMask1 = new TextBufferGeometry(globalString, {
-        font: font,
-        size: 0.899,
-        height: 0,
-      } );
-      geoMask1.center();
-      geoMask1.translate( 0, 0, 0.05);
+      geometry.translate( 0, 1, -0.3);
 
       geometry2 = new TextBufferGeometry(globalSubtitle, {
         font: font,
@@ -120,7 +108,7 @@ function createGeometry(record) {
         height: 0,
       } );
       geometry2.center();
-      geometry2.translate( 0, -1, 0);
+      geometry2.translate( 0, 0, -0.3);
       uniforms = {
         uTime: { value: 0.0 },
         u_resolution: { value: { x: null, y: null } },
@@ -135,62 +123,90 @@ function createGeometry(record) {
          transparent: true,
       });
 
-      maskMat = new MeshBasicMaterial({color: 0x687681,  transparent: true, opacity: 0.5,})
+      maskMat = new MeshBasicMaterial({color: 0x687681,  transparent: true, opacity: 0.1,})
       mesh = new Mesh(geometry, material);
       mesh2 = new Mesh(geometry2, material);
       maskFinal = new Mesh(geoMask1, maskMat)
       scene.add(mesh);
       scene.add(mesh2);
-      // scene.add(maskFinal);
+      myCoolBool = true;
     } );
+  }
 
-    // geometry3 = new PlaneGeometry(9.0, 6.0, 16, 16);
-    // geometry3.center();
-    // geometry3.translate( -0.2, -0.2, -1);
-    // let Newtexture = new TextureLoader().load(globalImg);
-    // material2 = new MeshBasicMaterial({ map: Newtexture, transparent: true, opacity: 0.3, });
-    // mesh3 = new Mesh(geometry3, material2);
-    // mesh3.rotation.y = Math.PI/18
-    // scene.add(mesh3);
+
+function createDance() {
+const geometryBall = new BoxGeometry( 1, 1, 1 );
+geometryBall.center();
+geometryBall.translate( 0, 1, -2);
+const material1 = new MeshLambertMaterial( {color: 0xFFFFFF, transparent: true, opacity: 0.1} );
+const sphere = new Mesh( geometryBall, material1 );
+sphere.name = 'Spheres'
+scene.add( sphere );
+
+// const geometryBall2 = new SphereBufferGeometry( 0.2, 32, 32 );
+// geometryBall2.center();
+// geometryBall2.translate( 0, 0, -1);
+// const material2 = new MeshBasicMaterial( {color: 0xffff00} );
+// const sphere1 = new Mesh( geometryBall2, material2 );
+// scene.add( sphere1 );
   }
 
   let btnElement = document.getElementById('next');
+  // let backBtn = document.getElementById('back');
+
   let arrowAnimation = document.getElementById("arrowtxt");
+
    function hideArrow() {
       arrowAnimation.classList.add("hide");
+      console.log('HIDING')
    }
+
   function showArrow() {
+      arrowAnimation.classList.remove("hide");
       arrowAnimation.classList.add("show");
+      console.log('SHOWING')
    }
+
   btnElement.addEventListener("click", () => {
       scene.remove( mesh );
       scene.remove( mesh2 );
-      scene.remove( mesh3 );
-      scene.remove( maskFinal );
       pIndex = (pIndex + 1) % repoData.length;
       record = repoData[pIndex];
       globalString = record['Project Name'];
       globalSubtitle = record.Subtitle;
-      globalImg = record.Img1[0].url
-      intialImg.src = globalImg;
       if(pIndex > 0){
-      showArrow();
       globalURL = 'content.html?' + record.Slug;
-      btnElement.innerHTML = 'Next project'
+      showArrow();
       }else{
-      hideArrow();
-      btnElement.innerHTML = 'View work'
       globalURL = '#'
+      hideArrow();
       }
       createGeometry();
   });
 
-    function uniformUpdateCallback() {
-    return {
-        time: time,
-        _scale: params.sdfScale
-    }
-}
+//   backBtn.addEventListener("click", () => {
+//     scene.remove( mesh );
+//     scene.remove( mesh2 );
+//     scene.remove( mesh3 );
+//     scene.remove( maskFinal );
+
+//     // pIndex = (pIndex - 1) % repoData.length;
+//     if(pIndex == 0){
+//       pIndex == 5
+//     }
+//     // pIndex = (pIndex - 1) % repoData.length;
+//     record = repoData[pIndex];
+//     globalString = record['Project Name'];
+//     globalSubtitle = record.Subtitle;
+//     if(pIndex > 0){
+//     globalURL = 'content.html?' + record.Slug;
+//     showArrow();
+//     }else{
+//     globalURL = '#'
+//     hideArrow();
+//     }
+//     createGeometry();
+// });
 
   let canvasElement = document.getElementById('container');
   if (canvasElement) {
@@ -199,20 +215,13 @@ function createGeometry(record) {
   });
   }
   init();
-  
-  let timetxt = document.getElementById("time");
-  setTimeout(function() { 
+  var SPEED = 0.01;
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
-      if (mesh) {
+      if (myCoolBool == true) {
         mesh.material.uniforms.uTime.value = clock.getElapsedTime(); 
       }
-      let now = moment().tz("America/New_York").format('hh:mm:ss')
-      timetxt.innerHTML = now;
     });
-   }, 500);
-
-console.log(camera.position.z)
 
 window.addEventListener('resize', resize);
 
@@ -224,10 +233,6 @@ function resize() {
   renderer.setSize(container.clientWidth, container.clientHeight);
   textSize1 = 0.5;
   textSize2 = 0.11;
-  // scene.remove( mesh );
-  // scene.remove( mesh2 );
-  // scene.remove( mesh3 );
-  // createGeometry();
     }else{
   camera.aspect = container.clientWidth / container.clientHeight;
   camera.position.z = 3;
@@ -235,9 +240,5 @@ function resize() {
   renderer.setSize(container.clientWidth, container.clientHeight);
   textSize1 = 0.75;
   textSize2 = 0.15;
-  // scene.remove( mesh );
-  // scene.remove( mesh2 );
-  // scene.remove( mesh3 );
-  // createGeometry();
     }
 }

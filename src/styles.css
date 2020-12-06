@@ -95,11 +95,9 @@ body {
     margin-left: 10.5%;
     transform: scaleX(-1);
 }
-
 .next:hover, .back:hover {
     fill: purple;
 }
-
 .live, .nxt-project, .resume-btn {
     padding: 0;
     border: none;
@@ -116,7 +114,6 @@ body {
    -webkit-text-stroke-width: 1px;
    -webkit-text-stroke-color: white;  
 }
-
 
 .live:hover, .nxt-project:hover, .resume-btn:hover {
 -webkit-text-stroke-width: 0;  
@@ -184,10 +181,6 @@ li, a:hover {
     color:purple;
 }
 
-/* a{
-    border: 0.1rem solid white;
-    padding: 0.5rem;
-} */
 .timeLocation{
     color:white;
     padding-left:.5rem;

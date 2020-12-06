@@ -36814,8 +36814,7 @@ function createDance() {
   // scene.add( sphere1 );
 }
 
-var btnElement = document.getElementById('next'); // let backBtn = document.getElementById('back');
-
+var btnElement = document.getElementById("next");
 var arrowAnimation = document.getElementById("arrowtxt");
 
 function hideArrow() {
@@ -36830,6 +36829,7 @@ function showArrow() {
 }
 
 btnElement.addEventListener("click", function () {
+  console.log('clickisvalid');
   scene.remove(mesh);
   scene.remove(mesh2);
   pIndex = (pIndex + 1) % repoData.length;
@@ -36846,29 +36846,7 @@ btnElement.addEventListener("click", function () {
   }
 
   createGeometry();
-}); //   backBtn.addEventListener("click", () => {
-//     scene.remove( mesh );
-//     scene.remove( mesh2 );
-//     scene.remove( mesh3 );
-//     scene.remove( maskFinal );
-//     // pIndex = (pIndex - 1) % repoData.length;
-//     if(pIndex == 0){
-//       pIndex == 5
-//     }
-//     // pIndex = (pIndex - 1) % repoData.length;
-//     record = repoData[pIndex];
-//     globalString = record['Project Name'];
-//     globalSubtitle = record.Subtitle;
-//     if(pIndex > 0){
-//     globalURL = 'content.html?' + record.Slug;
-//     showArrow();
-//     }else{
-//     globalURL = '#'
-//     hideArrow();
-//     }
-//     createGeometry();
-// });
-
+});
 var canvasElement = document.getElementById('container');
 
 if (canvasElement) {
@@ -36933,7 +36911,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61510" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50990" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

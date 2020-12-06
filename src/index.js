@@ -142,7 +142,6 @@ const material1 = new MeshLambertMaterial( {color: 0xFFFFFF, transparent: true, 
 const sphere = new Mesh( geometryBall, material1 );
 sphere.name = 'Spheres'
 scene.add( sphere );
-
 // const geometryBall2 = new SphereBufferGeometry( 0.2, 32, 32 );
 // geometryBall2.center();
 // geometryBall2.translate( 0, 0, -1);
@@ -151,9 +150,7 @@ scene.add( sphere );
 // scene.add( sphere1 );
   }
 
-  let btnElement = document.getElementById('next');
-  // let backBtn = document.getElementById('back');
-
+  let btnElement = document.getElementById("next");
   let arrowAnimation = document.getElementById("arrowtxt");
 
    function hideArrow() {
@@ -168,6 +165,7 @@ scene.add( sphere );
    }
 
   btnElement.addEventListener("click", () => {
+    console.log('clickisvalid')
       scene.remove( mesh );
       scene.remove( mesh2 );
       pIndex = (pIndex + 1) % repoData.length;
@@ -184,29 +182,6 @@ scene.add( sphere );
       createGeometry();
   });
 
-//   backBtn.addEventListener("click", () => {
-//     scene.remove( mesh );
-//     scene.remove( mesh2 );
-//     scene.remove( mesh3 );
-//     scene.remove( maskFinal );
-
-//     // pIndex = (pIndex - 1) % repoData.length;
-//     if(pIndex == 0){
-//       pIndex == 5
-//     }
-//     // pIndex = (pIndex - 1) % repoData.length;
-//     record = repoData[pIndex];
-//     globalString = record['Project Name'];
-//     globalSubtitle = record.Subtitle;
-//     if(pIndex > 0){
-//     globalURL = 'content.html?' + record.Slug;
-//     showArrow();
-//     }else{
-//     globalURL = '#'
-//     hideArrow();
-//     }
-//     createGeometry();
-// });
 
   let canvasElement = document.getElementById('container');
   if (canvasElement) {

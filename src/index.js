@@ -164,6 +164,7 @@ scene.add( sphere );
       console.log('SHOWING')
    }
 
+  if(btnElement){
   btnElement.addEventListener("click", () => {
     console.log('clickisvalid')
       scene.remove( mesh );
@@ -181,6 +182,7 @@ scene.add( sphere );
       }
       createGeometry();
   });
+   }
 
 
   let canvasElement = document.getElementById('container');

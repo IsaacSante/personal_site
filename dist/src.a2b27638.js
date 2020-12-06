@@ -36828,25 +36828,28 @@ function showArrow() {
   console.log('SHOWING');
 }
 
-btnElement.addEventListener("click", function () {
-  console.log('clickisvalid');
-  scene.remove(mesh);
-  scene.remove(mesh2);
-  pIndex = (pIndex + 1) % repoData.length;
-  record = repoData[pIndex];
-  globalString = record['Project Name'];
-  globalSubtitle = record.Subtitle;
+if (btnElement) {
+  btnElement.addEventListener("click", function () {
+    console.log('clickisvalid');
+    scene.remove(mesh);
+    scene.remove(mesh2);
+    pIndex = (pIndex + 1) % repoData.length;
+    record = repoData[pIndex];
+    globalString = record['Project Name'];
+    globalSubtitle = record.Subtitle;
 
-  if (pIndex > 0) {
-    globalURL = 'content.html?' + record.Slug;
-    showArrow();
-  } else {
-    globalURL = '#';
-    hideArrow();
-  }
+    if (pIndex > 0) {
+      globalURL = 'content.html?' + record.Slug;
+      showArrow();
+    } else {
+      globalURL = '#';
+      hideArrow();
+    }
 
-  createGeometry();
-});
+    createGeometry();
+  });
+}
+
 var canvasElement = document.getElementById('container');
 
 if (canvasElement) {
@@ -36911,7 +36914,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50990" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51182" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

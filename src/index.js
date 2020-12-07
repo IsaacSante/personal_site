@@ -136,7 +136,7 @@ function createGeometry(record) {
 function createDance() {
 geometryBall = new SphereGeometry(0.4, 8, -30);
 geometryBall.center();
-const material1 = new MeshBasicMaterial( {color: 0xFFFFFF, wireframe: true, transparent: true, opacity: 1,} );
+const material1 = new MeshBasicMaterial( {color: 0xFFFFFF, wireframe: true,} );
 sphere = new Mesh( geometryBall, material1 );
 sphere.name = 'Spheres'
 scene.add( sphere );
@@ -220,7 +220,7 @@ sphere.position.y = -1.3;
       if (myCoolBool == true) {
         mesh.material.uniforms.uTime.value = clock.getElapsedTime(); 
       }
-      sphere.rotation.y += 0.01;
+      sphere.rotation.y += 0.015;
 
     });
 

@@ -20,20 +20,41 @@
     </header>
     <div class="case-study">
     <h1 class="ProjectName" id="ProjectName">Project Name</h1>
-    <p class="year" id="year">Year</p>
+    <p class="current" id="current">#</p>
     </div>
-    <div class="descriptors">
-    <h3 class="Subtitle" id="Subtitle">Subtitle</h3>
-     <p class="Role" id="Role">Role</p>
-     <p class="Description" id="Description">Description</p>
+    <div class="wrapper-cont">
+        <section class="left-cont">
+            <p class="Subtitle" id="Subtitle">Subtitle</p>
+            <p class="defaults">Year</p>
+            <p class="year" id="year">Year</p>
+            <p class="defaults">Role</p>
+            <p class="Role" id="Role">Role</p>
+            <p class="defaults">Technologies/Skills</p>
+            <div class="tech-stack" id="tech-stack"></div>
+        </section>
+        <section class="right-cont">
+            <div class="img-handler" id="img-handler"></div>
+        </section>
     </div>
-    <div class="img-handler" id="img-handler"></div>
-    <div class="extracase"><p class="extra-info" id="extra-info">extra-info</p></div>
-    <div class="tech-stack" id="tech-stack"></div>
+    <div class="extra-cont">
+        <p id="Description">Description</p>
+        <p class="nothing">extra-info</p>
+    </div>
+    <div class="extra-cont">
+        <p id="extra-info">extra-info</p>
+        <p class="nothing">extra-info</p>
+    </div>
+    
+    <a id="live-link" href="#"><p class="floaty" id="live">Go to live project</p></a>
     <div class="link-btns">
-    <a id="live-link" href="#"><button class="live" id="live">View live project</button></a>
-    <a id="next-work-link" href="#"><button class="nxt-project" id="nxt-project">View next project</button></a>
+    <a id="back-work-link" href="#"><button class="nxt-project" id="back-project"><svg class="back-ctn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg></button></a>
+    <a id="next-work-link" href="#"><button class="nxt-project" id="nxt-project"><svg class="next-ctn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg></button></a>
     </div>
 </body>
+<style>
+    p {
+        font-size: 1.6rem;
+    }
+</style>
 <script src="/src/content.js"></script>
 </html>

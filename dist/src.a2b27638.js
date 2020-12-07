@@ -36799,9 +36799,7 @@ function createDance() {
   geometryBall.center();
   var material1 = new _three.MeshBasicMaterial({
     color: 0xFFFFFF,
-    wireframe: true,
-    transparent: true,
-    opacity: 1
+    wireframe: true
   });
   sphere = new _three.Mesh(geometryBall, material1);
   sphere.name = 'Spheres';
@@ -36899,7 +36897,7 @@ renderer.setAnimationLoop(function () {
     mesh.material.uniforms.uTime.value = clock.getElapsedTime();
   }
 
-  sphere.rotation.y += 0.01;
+  sphere.rotation.y += 0.015;
 });
 window.addEventListener('resize', resize);
 
@@ -36948,7 +36946,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62625" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51683" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

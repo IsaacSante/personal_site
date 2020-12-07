@@ -128,22 +128,25 @@ fetch('https://isaac-repo.glitch.me/pages', {
 }).then(function (resp) {
   return resp.json();
 }).then(function (data) {
+  dataHandler = data;
   var searchParam = document.location.search;
   searchParam = searchParam.substring(1);
   record = data.filter(function (child) {
     return child.Slug == searchParam;
   });
-  dataHandler = data;
   projectLocation = dataHandler.findIndex(function (x) {
     return x.Slug === record[0].Slug;
   });
-  console.log(projectLocation);
-  createInterface(record);
+  var current = document.getElementById("current");
+  current.innerHTML = '#' + projectLocation;
+  console.log(dataHandler);
+  createInterface(record, dataHandler);
 }).catch(function (e) {
   return console.error(e);
 });
 
-function createInterface(record) {
+function createInterface(record, dataHandler) {
+  console.log(dataHandler);
   var Pname = document.getElementById("ProjectName");
   var Pyear = document.getElementById("year");
   var Psub = document.getElementById("Subtitle");
@@ -152,6 +155,7 @@ function createInterface(record) {
   var Pproccess = document.getElementById("extra-info");
   var PfinalProjectSrc = document.getElementById("live-link");
   var nextProjectSrc = document.getElementById("next-work-link");
+  var backProjectSrc = document.getElementById("back-work-link");
   Pname.innerHTML = record[0]["Project Name"];
   Pyear.innerHTML = record[0].Year;
   Psub.innerHTML = record[0].Subtitle;
@@ -183,8 +187,19 @@ function createInterface(record) {
       projectLocation = 1;
     }
 
+    console.log(projectLocation);
     var nextProjectHref = 'content.html?' + dataHandler[projectLocation].Slug;
     nextProjectSrc.href = nextProjectHref;
+  });
+  var backwards = document.getElementById('back-project');
+  backwards.addEventListener("click", function () {
+    if (projectLocation == 1) {
+      projectLocation = dataHandler.length;
+    }
+
+    projectLocation = (projectLocation - 1) % dataHandler.length;
+    var backProjectHref = 'content.html?' + dataHandler[projectLocation].Slug;
+    backProjectSrc.href = backProjectHref;
   });
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -215,7 +230,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62625" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51683" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

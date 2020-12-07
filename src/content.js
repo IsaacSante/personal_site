@@ -7,16 +7,19 @@ fetch('https://isaac-repo.glitch.me/pages', {
         }
     }).then(resp => resp.json())
     .then(data => {
+        dataHandler = data;
         let searchParam = document.location.search;
         searchParam = searchParam.substring(1);
         record = data.filter(child => child.Slug == searchParam);
-        dataHandler = data;
         projectLocation = dataHandler.findIndex(x => x.Slug === record[0].Slug)
-        console.log(projectLocation)
-        createInterface(record)
+        let current = document.getElementById("current");
+        current.innerHTML = '#' + projectLocation;
+        console.log(dataHandler)
+        createInterface(record, dataHandler)
     }).catch(e => console.error(e));
 
- function createInterface(record){
+ function createInterface(record, dataHandler){
+         console.log(dataHandler)
          let Pname = document.getElementById("ProjectName");
          let Pyear = document.getElementById("year");
          let Psub = document.getElementById("Subtitle");
@@ -25,6 +28,7 @@ fetch('https://isaac-repo.glitch.me/pages', {
          let Pproccess = document.getElementById("extra-info");
          let PfinalProjectSrc = document.getElementById("live-link");
          let nextProjectSrc = document.getElementById("next-work-link");
+         let backProjectSrc = document.getElementById("back-work-link");
         Pname.innerHTML = record[0]["Project Name"];
         Pyear.innerHTML = record[0].Year;
         Psub.innerHTML = record[0].Subtitle;
@@ -50,7 +54,19 @@ fetch('https://isaac-repo.glitch.me/pages', {
             if (projectLocation === 0){
                 projectLocation = 1; 
             }
+            console.log(projectLocation)
             var nextProjectHref = 'content.html?' + dataHandler[projectLocation].Slug;
             nextProjectSrc.href = nextProjectHref
         });
+
+        let backwards =  document.getElementById('back-project');
+        backwards.addEventListener("click", () => {
+          if (projectLocation == 1){
+            projectLocation = dataHandler.length 
+        }
+          projectLocation  = (projectLocation - 1) % dataHandler.length;
+          var backProjectHref = 'content.html?' + dataHandler[projectLocation].Slug;
+          backProjectSrc.href = backProjectHref
+      });
+
  }

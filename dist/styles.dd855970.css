@@ -6,13 +6,10 @@
 body {
     margin: 0;
     background: #0b132b;
-    /* background: linear-gradient(180deg, rgba(11,19,43,1) 0%, rgba(0,0,0,1) 100%); */
-    /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(67,67,67,1) 50%, rgba(0,0,0,1) 100%); */
-    /* background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(19,15,64,1) 50%, rgba(0,0,0,1) 100%); */
-    /* background: linear-gradient(-25deg, rgba(0,0,0,1) 0%, rgba(19,15,64,1) 30%, rgba(19,15,64,1) 60%, rgba(0,0,0,1) 100%); */
     font-family: 'Montserrat', sans-serif;
     font-size: 130%;
     color:white;
+    overflow-x: hidden;
 }
 
 .hide-nav{
@@ -80,7 +77,13 @@ body {
     display: none;
   }
 
+.nothing{
+    opacity: 0%;
+}
+
  .next{
+  background-position: center;
+  background-size: cover;
   width: 5%;
   fill: white;
   opacity: 0.2;
@@ -94,6 +97,8 @@ body {
 } 
 
 .back{
+    background-position: center;
+    background-size: cover;
     width: 5%;
     fill: white;
     opacity: 0.2;
@@ -109,6 +114,25 @@ body {
 .next:hover, .back:hover {
     fill: purple;
 }
+
+
+.next-ctn{
+    width: 5%;
+    fill: white;
+    width: 3rem;
+    height: 3rem;
+}
+
+.back-ctn{
+    width: 5%;
+    fill: white;
+    width: 3rem;
+    height: 3rem;
+    transform: scaleX(-1);
+}
+
+
+
 .live, .nxt-project, .resume-btn {
     padding: 0;
     border: none;
@@ -147,12 +171,11 @@ animation-play-state: running;
 }
 
 .link-btns{
-padding-top: 5rem;
+margin-top: 5rem;
 display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding-bottom: 5rem;
+justify-content: space-between;
+margin-bottom: 5rem;
+padding: 10px 10%;
 }
 
 .live, .nxt-project {
@@ -277,11 +300,11 @@ letter-spacing: -.04em;
 padding:1rem;
 padding-bottom:4rem;
 }
-.Subtitle, .Main-Category, .Description, .Role, .img-handler img, .year, .left, .right, .social, .info-cont {
+.Subtitle, .Main-Category, .Description, .Role, .img-handler img, .year, .left, .right, .social, .info-cont, .defaults, .current {
        padding:1rem;
 }
-.Subtitle {
-   opacity:55%;
+.defaults{
+    text-decoration: underline;
 }
 .Description {
 font-weight: lighter;
@@ -289,16 +312,17 @@ line-height: 150%;
 font-size: 1.6rem;
 width:40%
 }
-.Role {
-font-weight: lighter;
-}
+
 .case-study, .case-study-info{
     width:100%;
-    border-top: .01rem solid white;
+    /* border-top: .01rem solid white; */
     display: flex;
     justify-content: space-between;
-    border-bottom: 2px solid #fff;
+    /* border-bottom: 2px solid #fff; */
     flex-direction: row;
+}
+.case-study{
+    padding: 10px 10%;
 }
 .case-study-info{
         border-top: none;
@@ -355,10 +379,7 @@ z-index:-10;
 .img-handler {
  display: flex;
  flex-direction: column ;
- align-items: center;
- justify-content: center;
- padding-top: 5rem;
- padding-bottom: 3rem;
+ width: 75%;
 }
 .extracase {
  display: flex;
@@ -377,21 +398,41 @@ width:40%;
 padding-top: 5rem;
  display: flex;
  flex-direction: column ;
- align-items: center;
  justify-content: center;
- opacity:50%;
  line-height: 200%;
+ padding: 1rem;
 }
-.year {
-padding-top:10rem;
+
+.tech-stack p{
+    display: flex;
+    justify-content: space-evenly;
+    border: 0.1rem solid;
+    border-color: white;
+    border-radius: 50px;
+    background: white;
+    margin-bottom: 0.8rem;
+    color: #0b132b;
+}
+
+.tech-stack p:hover{
+    background-color: purple;
+    border-color: purple;
 }
 
 .wrapper {
     display:flex;
-    /* background:red; */
     flex-wrap: wrap;
     border-top: .01rem solid white;
     height:100vh;
+}
+
+.wrapper-cont{
+    display:flex;
+    /* background:red; */
+    flex-wrap: wrap;
+    /* border-top: .01rem solid white; */
+    /* height:100vh;   */
+    padding: 10px 10%;
 }
 
 .left {
@@ -404,8 +445,24 @@ padding-top:10rem;
     flex-basis: 0;
   flex-grow: 999;
    min-width: 50%;
-       border-left: .01rem solid white;
+    border-left: .01rem solid white;
 }
+
+.left-cont {
+    /* background:green; */
+    flex-basis: 30rem;
+    flex-grow: 1;
+}
+
+.right-cont{
+    display: flex;
+    flex-basis: 0;
+  flex-grow: 999;
+   min-width: 50%;
+ justify-content: flex-end;
+}
+
+
 .right p {
     line-height:150%;
     padding-top:.5rem;
@@ -413,6 +470,27 @@ padding-top:10rem;
     font-size: 1.6rem;
 }
 
+
+
+.extra-cont{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 10px 10%;
+    padding-top: 5rem;
+    line-height:200%;
+}
+.extra-cont p {
+    margin-bottom: 1%;
+    flex-basis: 30rem;
+    flex-grow: 1;
+}
+
+.floaty{
+    text-decoration: underline;
+    margin-top:5rem;
+    padding: 10px 10%;
+}
 .social {
     padding-top: 3rem;
     display:flex;

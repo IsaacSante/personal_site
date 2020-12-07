@@ -6,6 +6,10 @@
 body {
     margin: 0;
     background: #0b132b;
+    /* background: linear-gradient(180deg, rgba(11,19,43,1) 0%, rgba(0,0,0,1) 100%); */
+    /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(67,67,67,1) 50%, rgba(0,0,0,1) 100%); */
+    /* background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(19,15,64,1) 50%, rgba(0,0,0,1) 100%); */
+    /* background: linear-gradient(-25deg, rgba(0,0,0,1) 0%, rgba(19,15,64,1) 30%, rgba(19,15,64,1) 60%, rgba(0,0,0,1) 100%); */
     font-family: 'Montserrat', sans-serif;
     font-size: 130%;
     color:white;
@@ -17,6 +21,9 @@ body {
   height: 100%;
   overflow: hidden;
   z-index: -3000;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  opacity: 1%;
 }
 .background::after {
   content:"";
@@ -70,29 +77,29 @@ body {
   }
 
  .next{
-    position: absolute;
-    top: 0;
-    right: 0;
-    fill: white;
-    opacity: 0.5;
-    z-index: 1000000000000000;
-    width: 4rem;
-    height: 4rem;
-    margin-top: 25%;
-    margin-right: 10.5%;
+  width: 5%;
+  fill: white;
+  opacity: 0.2;
+  width: 3rem;
+  height: 3rem;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 } 
 
 .back{
-    position: absolute;
-    top: 0;
-    left: 0;
+    width: 5%;
     fill: white;
-    opacity: 0.5;
-    z-index: 1000000000000000;
-    width: 4rem;
-    height: 4rem;
-    margin-top: 25%;
-    margin-left: 10.5%;
+    opacity: 0.2;
+    width: 3rem;
+    height: 3rem;
+     margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
     transform: scaleX(-1);
 }
 .next:hover, .back:hover {
@@ -192,11 +199,20 @@ li, a:hover {
     width:4rem;
     margin-right: auto;
 }
-.container {
-height: 100vh;
-/* cursor:pointer; */
-overflow:none;
+
+.middle {
+    padding-left:  10%;
+    padding-right:  10%;
+    display: flex;
+    justify-content: space-evenly;
 }
+
+    .container {
+    width: 80%;
+    height: 100vh;
+    cursor:pointer;
+    }
+
 header {
     display: flex;
     justify-content:space-evenly;
@@ -292,7 +308,7 @@ font-weight: lighter;
 }
 .arrowtxt {
     position:absolute;
-    bottom:20%;
+    bottom:7%;
     left:50%;
     font-weight: lighter;
     font-size: 3rem;

@@ -36643,7 +36643,7 @@ module.exports = `varying vec3 vUv;
 },{}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
-var THREE = _interopRequireWildcard(require("three"));
+var _three = require("three");
 
 var _fragment = _interopRequireDefault(require("./shaders/fragment.glsl"));
 
@@ -36651,27 +36651,26 @@ var _vertex = _interopRequireDefault(require("./shaders/vertex.glsl"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
+// import * as THREE from 'three'; 
 //REMOVE this in production
 var DEBUG = true; // Set to false in production
-
-if (DEBUG) {
-  window.THREE = THREE;
-}
+// if(DEBUG) {
+//     window.THREE = THREE;
+// }
 
 var uniforms;
 var container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, geoMask1, maskMat, maskFinal, clock, repoData, material, material2, time, record, pIndex;
 var globalString, globalSubtitle, globalURL, globalImg;
 var textSize1, textSize2;
 var myCoolBool = false;
+var geometryBall, sphere;
+var colors = ['#0b132b', '#A55C1B', '#485461', '#233329', '#3F0D12'];
+var indexColor = 0;
 
 function init() {
   container = document.querySelector(".container");
-  scene = new THREE.Scene();
-  clock = new THREE.Clock();
+  scene = new _three.Scene();
+  clock = new _three.Clock();
   var spinner = document.getElementById("spinner");
 
   function hideSpinner() {
@@ -36704,7 +36703,8 @@ function init() {
   });
   hideSpinner();
   createCamera();
-  createLights(); // createDance();
+  createLights();
+  createDance();
 
   if (DEBUG) {
     window.scene = scene;
@@ -36714,19 +36714,19 @@ function init() {
 
 function createCamera() {
   var aspect = container.clientWidth / container.clientHeight;
-  camera = new THREE.PerspectiveCamera(100, aspect, 0.1, 1000);
+  camera = new _three.PerspectiveCamera(100, aspect, 0.1, 1000);
   camera.position.set(0, -0.5, 3);
 }
 
 function createLights() {
-  var directionalLight = new THREE.DirectionalLight(0xffffff, 5);
+  var directionalLight = new _three.DirectionalLight(0xffffff, 5);
   directionalLight.position.set(5, 5, 10);
-  var hemisphereLight = new THREE.HemisphereLight(0xddeeff, 0x202020, 3);
+  var hemisphereLight = new _three.HemisphereLight(0xddeeff, 0x202020, 3);
   scene.add(directionalLight, hemisphereLight);
 }
 
 function createRenderer() {
-  renderer = new THREE.WebGLRenderer({
+  renderer = new _three.WebGLRenderer({
     antialias: true,
     alpha: true
   });
@@ -36739,16 +36739,16 @@ function createRenderer() {
 }
 
 function createGeometry(record) {
-  var loader = new THREE.FontLoader();
+  var loader = new _three.FontLoader();
   loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
-    geometry = new THREE.TextBufferGeometry(globalString, {
+    geometry = new _three.TextBufferGeometry(globalString, {
       font: font,
       size: 0.7,
       height: 0
     });
     geometry.center();
     geometry.translate(0, 1, -0.3);
-    geometry2 = new THREE.TextBufferGeometry(globalSubtitle, {
+    geometry2 = new _three.TextBufferGeometry(globalSubtitle, {
       font: font,
       size: 0.16,
       height: 0
@@ -36767,28 +36767,28 @@ function createGeometry(record) {
       },
       colorA: {
         type: 'vec3',
-        value: new THREE.Color(0x74ebd5)
+        value: new _three.Color(0x74ebd5)
       },
       colorB: {
         type: 'vec3',
-        value: new THREE.Color(0xACB6E5)
+        value: new _three.Color(0xACB6E5)
       }
     };
-    material = new THREE.ShaderMaterial({
+    material = new _three.ShaderMaterial({
       uniforms: uniforms,
       vertexShader: _vertex.default,
       fragmentShader: _fragment.default,
       opacity: 0.5,
       transparent: true
     });
-    maskMat = new THREE.MeshBasicMaterial({
+    maskMat = new _three.MeshBasicMaterial({
       color: 0x687681,
       transparent: true,
       opacity: 0.1
     });
-    mesh = new THREE.Mesh(geometry, material);
-    mesh2 = new THREE.Mesh(geometry2, material);
-    maskFinal = new THREE.Mesh(geoMask1, maskMat);
+    mesh = new _three.Mesh(geometry, material);
+    mesh2 = new _three.Mesh(geometry2, material);
+    maskFinal = new _three.Mesh(geoMask1, maskMat);
     scene.add(mesh);
     scene.add(mesh2);
     myCoolBool = true;
@@ -36796,44 +36796,78 @@ function createGeometry(record) {
 }
 
 function createDance() {
-  var geometryBall = new THREE.BoxGeometry(1, 1, 1);
+  geometryBall = new _three.SphereGeometry(0.4, 8, -30);
   geometryBall.center();
-  geometryBall.translate(0, 1, -2);
-  var material1 = new THREE.MeshLambertMaterial({
+  var material1 = new _three.MeshBasicMaterial({
     color: 0xFFFFFF,
+    wireframe: true,
     transparent: true,
-    opacity: 0.1
+    opacity: 1
   });
-  var sphere = new THREE.Mesh(geometryBall, material1);
+  sphere = new _three.Mesh(geometryBall, material1);
   sphere.name = 'Spheres';
-  scene.add(sphere); // const geometryBall2 = new SphereBufferGeometry( 0.2, 32, 32 );
-  // geometryBall2.center();
-  // geometryBall2.translate( 0, 0, -1);
-  // const material2 = new MeshBasicMaterial( {color: 0xffff00} );
-  // const sphere1 = new Mesh( geometryBall2, material2 );
-  // scene.add( sphere1 );
+  scene.add(sphere);
+  sphere.position.y = -1.3;
 }
 
 var btnElement = document.getElementById("next");
+var backElement = document.getElementById("back");
 var arrowAnimation = document.getElementById("arrowtxt");
 
 function hideArrow() {
   arrowAnimation.classList.add("hide");
-  console.log('HIDING');
 }
 
 function showArrow() {
   arrowAnimation.classList.remove("hide");
   arrowAnimation.classList.add("show");
-  console.log('SHOWING');
 }
 
 if (btnElement) {
   btnElement.addEventListener("click", function () {
-    console.log('clickisvalid');
+    indexColor++;
+
+    if (indexColor > 4) {
+      indexColor = 0;
+    }
+
+    document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor];
     scene.remove(mesh);
     scene.remove(mesh2);
     pIndex = (pIndex + 1) % repoData.length;
+    record = repoData[pIndex];
+    globalString = record['Project Name'];
+    globalSubtitle = record.Subtitle;
+
+    if (pIndex > 0) {
+      globalURL = 'content.html?' + record.Slug;
+      showArrow();
+    } else {
+      globalURL = '#';
+      hideArrow();
+    }
+
+    createGeometry();
+  });
+}
+
+if (backElement) {
+  backElement.addEventListener("click", function () {
+    if (indexColor == 0) {
+      indexColor = colors.length;
+    }
+
+    indexColor--;
+    document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor];
+    scene.remove(mesh);
+    scene.remove(mesh2);
+
+    if (pIndex == 0) {
+      pIndex = repoData.length - 1;
+    } else {
+      pIndex = (pIndex - 1) % repoData.length;
+    }
+
     record = repoData[pIndex];
     globalString = record['Project Name'];
     globalSubtitle = record.Subtitle;
@@ -36859,13 +36893,14 @@ if (canvasElement) {
 }
 
 init();
-var SPEED = 0.01;
 renderer.setAnimationLoop(function () {
   renderer.render(scene, camera);
 
   if (myCoolBool == true) {
     mesh.material.uniforms.uTime.value = clock.getElapsedTime();
   }
+
+  sphere.rotation.y += 0.01;
 });
 window.addEventListener('resize', resize);
 
@@ -36914,7 +36949,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51638" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53064" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -10,26 +10,30 @@ import {
     Clock,
     FontLoader,
     TextBufferGeometry,
-    PlaneGeometry,
-    TextureLoader,
     MeshBasicMaterial,
-    SphereBufferGeometry,
-    MeshLambertMaterial,
-    BoxGeometry,
+    SphereGeometry,
   } from "three";
   import fragmentShader from "./shaders/fragment.glsl"
   import vertexShader from "./shaders/vertex.glsl";
-  import * as THREE from 'three'; //REMOVE this in production
+  // import * as THREE from 'three'; 
+  //REMOVE this in production
 
-  const DEBUG = true; // Set to false in production
-  if(DEBUG) {
-      window.THREE = THREE;
-  }
+  const DEBUG = true; 
+  
+  // Set to false in production
+
+  // if(DEBUG) {
+  //     window.THREE = THREE;
+  // }
   let uniforms;
   let container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, geoMask1, maskMat,maskFinal, clock, repoData, material, material2,  time, record, pIndex;
   let globalString, globalSubtitle, globalURL, globalImg;
   let textSize1, textSize2;
   let myCoolBool = false;
+  let geometryBall, sphere;
+
+  let colors = ['#0b132b', '#A55C1B', '#485461', '#233329', '#3F0D12'];
+  var indexColor = 0; 
 
   function init () {
     container = document.querySelector(".container");
@@ -61,7 +65,7 @@ import {
     hideSpinner();
     createCamera();
     createLights();
-    // createDance();
+    createDance();
     if(DEBUG) {
       window.scene = scene;
       window.camera = camera;
@@ -135,38 +139,35 @@ function createGeometry(record) {
 
 
 function createDance() {
-const geometryBall = new BoxGeometry( 1, 1, 1 );
+geometryBall = new SphereGeometry(0.4, 8, -30);
 geometryBall.center();
-geometryBall.translate( 0, 1, -2);
-const material1 = new MeshLambertMaterial( {color: 0xFFFFFF, transparent: true, opacity: 0.1} );
-const sphere = new Mesh( geometryBall, material1 );
+const material1 = new MeshBasicMaterial( {color: 0xFFFFFF, wireframe: true, transparent: true, opacity: 1,} );
+sphere = new Mesh( geometryBall, material1 );
 sphere.name = 'Spheres'
 scene.add( sphere );
-// const geometryBall2 = new SphereBufferGeometry( 0.2, 32, 32 );
-// geometryBall2.center();
-// geometryBall2.translate( 0, 0, -1);
-// const material2 = new MeshBasicMaterial( {color: 0xffff00} );
-// const sphere1 = new Mesh( geometryBall2, material2 );
-// scene.add( sphere1 );
-  }
+sphere.position.y = -1.3; 
+}
 
   let btnElement = document.getElementById("next");
+  let backElement = document.getElementById("back");
   let arrowAnimation = document.getElementById("arrowtxt");
 
    function hideArrow() {
       arrowAnimation.classList.add("hide");
-      console.log('HIDING')
    }
 
   function showArrow() {
       arrowAnimation.classList.remove("hide");
       arrowAnimation.classList.add("show");
-      console.log('SHOWING')
    }
 
   if(btnElement){
   btnElement.addEventListener("click", () => {
-    console.log('clickisvalid')
+    indexColor ++ 
+    if (indexColor > 4 ) {
+      indexColor = 0
+    }
+      document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor]
       scene.remove( mesh );
       scene.remove( mesh2 );
       pIndex = (pIndex + 1) % repoData.length;
@@ -184,6 +185,34 @@ scene.add( sphere );
   });
    }
 
+   if(backElement){
+    backElement.addEventListener("click", () => {
+      if (indexColor == 0 ){
+        indexColor = colors.length;
+      }
+      indexColor --
+      document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor]
+        scene.remove( mesh );
+        scene.remove( mesh2 );
+        if (pIndex == 0 ){
+          pIndex = repoData.length - 1;
+        }else{
+         pIndex = (pIndex - 1) % repoData.length;
+        }
+        record = repoData[pIndex];
+        globalString = record['Project Name'];
+        globalSubtitle = record.Subtitle;
+        if(pIndex > 0){
+        globalURL = 'content.html?' + record.Slug;
+        showArrow();
+        }else{
+        globalURL = '#'
+        hideArrow();
+        }
+        createGeometry();
+    });
+     }
+
 
   let canvasElement = document.getElementById('container');
   if (canvasElement) {
@@ -192,12 +221,14 @@ scene.add( sphere );
   });
   }
   init();
-  var SPEED = 0.01;
+
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
       if (myCoolBool == true) {
         mesh.material.uniforms.uTime.value = clock.getElapsedTime(); 
       }
+      sphere.rotation.y += 0.01;
+
     });
 
 window.addEventListener('resize', resize);

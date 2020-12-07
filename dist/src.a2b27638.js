@@ -36659,8 +36659,8 @@ var DEBUG = true; // Set to false in production
 // }
 
 var uniforms;
-var container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, geoMask1, maskMat, maskFinal, clock, repoData, material, material2, time, record, pIndex;
-var globalString, globalSubtitle, globalURL, globalImg;
+var container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, geoMask1, maskMat, clock, repoData, material, time, record, pIndex;
+var globalString, globalSubtitle, globalURL;
 var textSize1, textSize2;
 var myCoolBool = false;
 var geometryBall, sphere;
@@ -36788,7 +36788,6 @@ function createGeometry(record) {
     });
     mesh = new _three.Mesh(geometry, material);
     mesh2 = new _three.Mesh(geometry2, material);
-    maskFinal = new _three.Mesh(geoMask1, maskMat);
     scene.add(mesh);
     scene.add(mesh2);
     myCoolBool = true;
@@ -36949,7 +36948,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53064" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62625" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -15,6 +15,10 @@ body {
     color:white;
 }
 
+.hide-nav{
+    display: none;
+}
+
 .background {
   position: absolute;
   width: 100%;

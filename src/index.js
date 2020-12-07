@@ -17,24 +17,20 @@ import {
   import vertexShader from "./shaders/vertex.glsl";
   // import * as THREE from 'three'; 
   //REMOVE this in production
-
   const DEBUG = true; 
-  
   // Set to false in production
 
   // if(DEBUG) {
   //     window.THREE = THREE;
   // }
   let uniforms;
-  let container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, geoMask1, maskMat,maskFinal, clock, repoData, material, material2,  time, record, pIndex;
-  let globalString, globalSubtitle, globalURL, globalImg;
+  let container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, geoMask1, maskMat, clock, repoData, material, time, record, pIndex;
+  let globalString, globalSubtitle, globalURL;
   let textSize1, textSize2;
   let myCoolBool = false;
   let geometryBall, sphere;
-
   let colors = ['#0b132b', '#A55C1B', '#485461', '#233329', '#3F0D12'];
   var indexColor = 0; 
-
   function init () {
     container = document.querySelector(".container");
     scene = new Scene();
@@ -130,7 +126,6 @@ function createGeometry(record) {
       maskMat = new MeshBasicMaterial({color: 0x687681,  transparent: true, opacity: 0.1,})
       mesh = new Mesh(geometry, material);
       mesh2 = new Mesh(geometry2, material);
-      maskFinal = new Mesh(geoMask1, maskMat)
       scene.add(mesh);
       scene.add(mesh2);
       myCoolBool = true;
@@ -212,8 +207,6 @@ sphere.position.y = -1.3;
         createGeometry();
     });
      }
-
-
   let canvasElement = document.getElementById('container');
   if (canvasElement) {
   canvasElement.addEventListener("click", () => {

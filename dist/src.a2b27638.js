@@ -43775,7 +43775,7 @@ function init() {
     record = repoData[pIndex];
     globalString = record.fields['Project Name'];
     globalSubtitle = record.fields.Subtitle;
-    globalURL = '#';
+    globalURL = 'info.html';
     createGeometry();
   }, function done(err) {
     if (err) {
@@ -43914,7 +43914,7 @@ if (btnElement) {
       globalURL = 'content.html?' + record.fields.Slug;
       showArrow();
     } else {
-      globalURL = '#';
+      globalURL = 'info.html';
       hideArrow();
     }
 
@@ -43947,7 +43947,7 @@ if (backElement) {
       globalURL = 'content.html?' + record.fields.Slug;
       showArrow();
     } else {
-      globalURL = '#';
+      globalURL = 'info.html';
       hideArrow();
     }
 
@@ -44016,7 +44016,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60364" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50512" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

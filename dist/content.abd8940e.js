@@ -7227,7 +7227,7 @@ base('Work').select({
     return x.fields.Slug === record[0].fields.Slug;
   });
   var current = document.getElementById("current");
-  current.innerHTML = '#' + projectLocation;
+  current.innerHTML = '- ' + 'Project ' + projectLocation + ' -';
   record = record[0].fields;
   document.body.style.backgroundColor = record.backgroundColor;
   createInterface(record, records);
@@ -7269,6 +7269,7 @@ function createInterface(record, records) {
     var txtNode = document.createElement("P");
     txtNode.innerHTML = record.Technology[i];
     document.getElementById("tech-stack").appendChild(txtNode);
+    txtNode.style.color = record.backgroundColor;
   }
 
   var nextProjectBtn = document.getElementById('nxt-project');
@@ -7321,7 +7322,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60364" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50512" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

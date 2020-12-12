@@ -11,7 +11,7 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
     record = records.filter(x => x.fields.Slug == searchParam)
     projectLocation = records.findIndex(x => x.fields.Slug === record[0].fields.Slug)
     let current = document.getElementById("current");
-    current.innerHTML = '#' + projectLocation;
+    current.innerHTML = '- ' + 'Project ' + projectLocation + ' -';
     record = record[0].fields
     document.body.style.backgroundColor = record.backgroundColor
     createInterface(record, records)
@@ -45,7 +45,8 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
         for(i=0;i<techLength;i++){
             var txtNode = document.createElement("P"); 
             txtNode.innerHTML = record.Technology[i];
-            document.getElementById("tech-stack").appendChild(txtNode); 
+            document.getElementById("tech-stack").appendChild(txtNode);
+            txtNode.style.color = (record.backgroundColor)
          }
          let nextProjectBtn = document.getElementById('nxt-project');
          nextProjectBtn.addEventListener("click", () => {

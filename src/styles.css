@@ -136,6 +136,8 @@ animation-play-state: running;
 position: absolute;
 display: flex;
 justify-content: space-between;
+margin-top: 20%;
+margin-left: 2%;
 }
 
 .link-btns2 {
@@ -143,6 +145,8 @@ justify-content: space-between;
     right: 0;
     display: flex;
     justify-content: flex-end;
+    margin-top:  20%;
+    margin-right: 2%;
  }
 
 .live, .nxt-project {
@@ -191,7 +195,7 @@ li, a:hover {
     cursor:pointer;
     padding: 5px 5px;
     width:4rem;
-    margin-right: auto;
+    /* margin-right: auto; */
 }
 
 .middle {
@@ -208,7 +212,7 @@ li, a:hover {
 
 header {
     display: flex;
-    justify-content:space-evenly;
+    justify-content:space-between;
     align-items: center;
     padding: 10px 10%;
     padding-top: 4rem;
@@ -358,6 +362,7 @@ width:40%;
     display:flex;
     flex-wrap: wrap;
     padding: 10px 10%;
+    margin-bottom: 10%;
 }
 .left {
     flex-basis: 30rem;

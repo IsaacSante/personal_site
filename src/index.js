@@ -43,7 +43,7 @@ import {
     record = repoData[pIndex];
     globalString = record.fields['Project Name'];
     globalSubtitle = record.fields.Subtitle;
-    globalURL = '#'
+    globalURL = 'info.html'
     createGeometry();
   }, function done(err) {
     if (err) { console.error(err); return; }
@@ -148,7 +148,7 @@ sphere.position.y = -1.3;
       globalURL = 'content.html?' + record.fields.Slug;
       showArrow();
       }else{
-      globalURL = '#'
+      globalURL = 'info.html'
       hideArrow();
       }
       createGeometry();
@@ -175,7 +175,7 @@ sphere.position.y = -1.3;
         globalURL = 'content.html?' + record.fields.Slug;
         showArrow();
         }else{
-        globalURL = '#'
+        globalURL = 'info.html'
         hideArrow();
         }
         createGeometry();

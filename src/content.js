@@ -10,9 +10,10 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
     searchParam = searchParam.substring(1);
     record = records.filter(x => x.fields.Slug == searchParam)
     projectLocation = records.findIndex(x => x.fields.Slug === record[0].fields.Slug)
-    let current = document.getElementById("current");
-    current.innerHTML = '- ' + 'Project ' + projectLocation + ' -';
     record = record[0].fields
+    console.log(projectLocation)
+    let current = document.getElementById("current");
+    current.innerHTML = 'Project ' + projectLocation + ' - ' + record["Main Category"];
     document.body.style.backgroundColor = record.backgroundColor
     createInterface(record, records)
   }, function done(err) {
@@ -33,13 +34,7 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
         Psub.innerHTML = record.Subtitle;
         Pdesc.innerHTML = record.Description  
         Prole.innerHTML = 'Role  - ' + record.Role;
-        let imgLength = record.Img1.length;
         PfinalProjectSrc.href = record["Project Final Src"];
-         for(i=0;i<imgLength;i++){
-             var img = document.createElement('img'); 
-             img.src = record.Img1[i].url
-            document.getElementById('img-handler').appendChild(img); 
-         }
         Pproccess.innerHTML = record.Process 
         let techLength = record.Technology.length;
         for(i=0;i<techLength;i++){
@@ -48,12 +43,27 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
             document.getElementById("tech-stack").appendChild(txtNode);
             txtNode.style.color = (record.backgroundColor)
          }
+         if(record["Extra Links"]){
+          var vidLink = document.createElement('iframe'); 
+          vidLink.width="560" ;
+          vidLink.height="315" ;
+          vidLink.src = record["Extra Links"]
+          document.getElementById('img-handler').appendChild(vidLink); 
+          vidLink.setAttribute('allowFullScreen', '')
+         }
+        let imgLength = record.Img1.length;
+         for(i=0;i<imgLength;i++){
+             var img = document.createElement('img'); 
+             img.src = record.Img1[i].url
+            document.getElementById('img-handler').appendChild(img); 
+         }
          let nextProjectBtn = document.getElementById('nxt-project');
          nextProjectBtn.addEventListener("click", () => {
             projectLocation  = (projectLocation + 1) % records.length;
             if (projectLocation === 0){
                 projectLocation = 1; 
             }
+            console.log(projectLocation)
             var nextProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
             nextProjectSrc.href = nextProjectHref
         });
@@ -62,6 +72,7 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
           if (projectLocation == 1){
             projectLocation = records.length 
         }
+        console.log(projectLocation)
           projectLocation  = (projectLocation - 1) % records.length;
           var backProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
           backProjectSrc.href = backProjectHref

@@ -7226,9 +7226,10 @@ base('Work').select({
   projectLocation = records.findIndex(function (x) {
     return x.fields.Slug === record[0].fields.Slug;
   });
-  var current = document.getElementById("current");
-  current.innerHTML = '- ' + 'Project ' + projectLocation + ' -';
   record = record[0].fields;
+  console.log(projectLocation);
+  var current = document.getElementById("current");
+  current.innerHTML = 'Project ' + projectLocation + ' - ' + record["Main Category"];
   document.body.style.backgroundColor = record.backgroundColor;
   createInterface(record, records);
 }, function done(err) {
@@ -7253,15 +7254,7 @@ function createInterface(record, records) {
   Psub.innerHTML = record.Subtitle;
   Pdesc.innerHTML = record.Description;
   Prole.innerHTML = 'Role  - ' + record.Role;
-  var imgLength = record.Img1.length;
   PfinalProjectSrc.href = record["Project Final Src"];
-
-  for (i = 0; i < imgLength; i++) {
-    var img = document.createElement('img');
-    img.src = record.Img1[i].url;
-    document.getElementById('img-handler').appendChild(img);
-  }
-
   Pproccess.innerHTML = record.Process;
   var techLength = record.Technology.length;
 
@@ -7272,6 +7265,23 @@ function createInterface(record, records) {
     txtNode.style.color = record.backgroundColor;
   }
 
+  if (record["Extra Links"]) {
+    var vidLink = document.createElement('iframe');
+    vidLink.width = "560";
+    vidLink.height = "315";
+    vidLink.src = record["Extra Links"];
+    document.getElementById('img-handler').appendChild(vidLink);
+    vidLink.setAttribute('allowFullScreen', '');
+  }
+
+  var imgLength = record.Img1.length;
+
+  for (i = 0; i < imgLength; i++) {
+    var img = document.createElement('img');
+    img.src = record.Img1[i].url;
+    document.getElementById('img-handler').appendChild(img);
+  }
+
   var nextProjectBtn = document.getElementById('nxt-project');
   nextProjectBtn.addEventListener("click", function () {
     projectLocation = (projectLocation + 1) % records.length;
@@ -7280,6 +7290,7 @@ function createInterface(record, records) {
       projectLocation = 1;
     }
 
+    console.log(projectLocation);
     var nextProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
     nextProjectSrc.href = nextProjectHref;
   });
@@ -7289,6 +7300,7 @@ function createInterface(record, records) {
       projectLocation = records.length;
     }
 
+    console.log(projectLocation);
     projectLocation = (projectLocation - 1) % records.length;
     var backProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
     backProjectSrc.href = backProjectHref;
@@ -7322,7 +7334,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53875" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58919" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

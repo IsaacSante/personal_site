@@ -12,6 +12,7 @@ body {
     color:white;
     overflow-x: hidden;
 }
+iframe { border: none; }
   #spinner{
     visibility: visible;
     width: 10em;
@@ -258,9 +259,10 @@ letter-spacing: .04em;
 padding:1rem;
 padding-bottom:4rem;
 }
-.Subtitle, .Main-Category, .Description, .Role, .img-handler img, .year, .left, .right, .social, .info-cont, .defaults, .current {
+.Subtitle, .Main-Category, .Description, .Role, .img-handler img, .year, .left, .right, .social, .info-cont, .defaults, .current, .vid {
        padding:1rem;
 }
+
 .defaults{
     text-decoration: none;
     font-size: 1.3rem;

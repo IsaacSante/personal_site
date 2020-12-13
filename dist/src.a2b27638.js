@@ -43751,7 +43751,7 @@ var container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, clock,
 var globalString, globalSubtitle, globalURL;
 var myCoolBool = false;
 var geometryBall, sphere;
-var colors = ['#000000', '#A55C1B', '#485461', '#233329', '#3F0D12'];
+var colors = ['#000000', '#A55C1B', '#485461', '#233329', '#3F0D12', '#023047'];
 var indexColor = 0;
 
 function init() {
@@ -43767,7 +43767,7 @@ function init() {
 
   base('Work').select({
     view: "Grid view"
-  }).eachPage(function page(records, fetchNextPage) {
+  }).eachPage(function page(records) {
     repoData = records;
     pIndex = repoData.findIndex(function (x) {
       return x.fields["Project Name"] === "Isaac Sante";
@@ -43898,7 +43898,7 @@ if (btnElement) {
   btnElement.addEventListener("click", function () {
     indexColor++;
 
-    if (indexColor > 4) {
+    if (indexColor > 5) {
       indexColor = 0;
     }
 
@@ -44016,7 +44016,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53875" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58919" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

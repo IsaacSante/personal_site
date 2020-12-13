@@ -24,7 +24,7 @@ import {
   let globalString, globalSubtitle, globalURL;
   let myCoolBool = false;
   let geometryBall, sphere;
-  let colors = ['#000000', '#A55C1B', '#485461', '#233329', '#3F0D12'];
+  let colors = ['#000000', '#A55C1B', '#485461', '#233329', '#3F0D12', '#023047'];
   var indexColor = 0; 
   function init () {
     container = document.querySelector(".container");
@@ -37,7 +37,7 @@ import {
    }
    base('Work').select({
     view: "Grid view"
-  }).eachPage(function page(records, fetchNextPage) {
+  }).eachPage(function page(records) {
     repoData = records
     pIndex = repoData.findIndex(x => x.fields["Project Name"] === "Isaac Sante")
     record = repoData[pIndex];
@@ -134,7 +134,7 @@ sphere.position.y = -1.3;
   if(btnElement){
   btnElement.addEventListener("click", () => {
     indexColor ++ 
-    if (indexColor > 4 ) {
+    if (indexColor > 5 ) {
       indexColor = 0
     }
       document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor]

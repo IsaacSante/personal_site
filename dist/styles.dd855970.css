@@ -12,7 +12,20 @@ body {
     color:white;
     overflow-x: hidden;
 }
-iframe { border: none; }
+iframe { 
+border: none; 
+padding-bottom: 1rem;
+}
+.newFrame{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-viz{
+    height: 400px;
+}
   #spinner{
     visibility: visible;
     width: 10em;
@@ -59,7 +72,6 @@ iframe { border: none; }
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 } 
-
 .back{
     background-position: center;
     background-size: cover;
@@ -77,15 +89,12 @@ iframe { border: none; }
 .next:hover, .back:hover {
     fill: purple;
 }
-
-
 .next-ctn{
     width: 5%;
     fill: white;
     width: 3rem;
     height: 3rem;
 }
-
 .back-ctn{
     width: 5%;
     fill: white;
@@ -93,9 +102,6 @@ iframe { border: none; }
     height: 3rem;
     transform: scaleX(-1);
 }
-
-
-
 .live, .nxt-project, .resume-btn {
     padding: 0;
     border: none;
@@ -196,7 +202,6 @@ li, a:hover {
     cursor:pointer;
     padding: 5px 5px;
     width:4rem;
-    /* margin-right: auto; */
 }
 
 .middle {
@@ -258,6 +263,9 @@ font-size: 7rem;
 letter-spacing: .04em;
 padding:1rem;
 padding-bottom:4rem;
+}
+.right h1{
+    padding-bottom:1rem;
 }
 .Subtitle, .Main-Category, .Description, .Role, .img-handler img, .year, .left, .right, .social, .info-cont, .defaults, .current, .vid {
        padding:1rem;
@@ -382,7 +390,6 @@ width:40%;
 .right-cont{
     display: flex;
     flex-basis: 0;
-  /* flex-grow: 999; */
    min-width: 50%;
  justify-content: flex-end;
 }

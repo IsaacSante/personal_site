@@ -43,6 +43,20 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
             document.getElementById("tech-stack").appendChild(txtNode);
             txtNode.style.color = (record.backgroundColor)
          }
+         if(record.viz){
+          var vizLink = document.createElement('iframe'); 
+          vizLink.src = record.viz
+          document.getElementById('img-handler').appendChild(vizLink); 
+          vizLink.classList.add("data-viz");
+         }
+         if(record.yt){
+          var vidLink1 = document.createElement('iframe'); 
+          vidLink1.width="560" ;
+          vidLink1.height="315" ;
+          vidLink1.src = record.yt
+          document.getElementById('img-handler').appendChild(vidLink1); 
+          vidLink1.setAttribute('allowFullScreen', '')
+         }
          if(record["Extra Links"]){
           var vidLink = document.createElement('iframe'); 
           vidLink.width="560" ;

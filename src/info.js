@@ -37,7 +37,7 @@ const Sketch = (p) => {
                     let x = (pg.random(pg.width)+p.frameCount)%(pg.width+txtSize)-pg.width/2
                     let y = i * 40
                     pg.fill(255)
-                    pg.textSize(50)
+                    pg.textSize(40)
                     pg.text('DIGTAL SPACES PHYSICAL BODIES', -x, y)
                 }
             pg.pop()

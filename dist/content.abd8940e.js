@@ -7208,7 +7208,7 @@ function () {
 
 module.exports = Airtable;
 },{"./base":"node_modules/airtable/lib/base.js","./record":"node_modules/airtable/lib/record.js","./table":"node_modules/airtable/lib/table.js","./airtable_error":"node_modules/airtable/lib/airtable_error.js"}],"src/content.js":[function(require,module,exports) {
-var projectLocation, dataHandler, record;
+var projectLocation, record;
 
 var Airtable = require("airtable");
 
@@ -7217,7 +7217,7 @@ var base = new Airtable({
 }).base('appvMjgA3Di00eDev');
 base('Work').select({
   view: "Grid view"
-}).eachPage(function page(records, fetchNextPage) {
+}).eachPage(function page(records) {
   var searchParam = document.location.search;
   searchParam = searchParam.substring(1);
   record = records.filter(function (x) {
@@ -7306,7 +7306,6 @@ function createInterface(record, records) {
       projectLocation = 1;
     }
 
-    console.log(projectLocation);
     var nextProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
     nextProjectSrc.href = nextProjectHref;
   });
@@ -7316,7 +7315,6 @@ function createInterface(record, records) {
       projectLocation = records.length;
     }
 
-    console.log(projectLocation);
     projectLocation = (projectLocation - 1) % records.length;
     var backProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
     backProjectSrc.href = backProjectHref;
@@ -7350,7 +7348,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59165" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62420" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

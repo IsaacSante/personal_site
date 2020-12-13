@@ -43746,13 +43746,13 @@ var Airtable = require("airtable");
 var base = new Airtable({
   apiKey: "keyMKnZBFsdFtC0UX"
 }).base('appvMjgA3Di00eDev');
-var uniforms;
-var container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, clock, repoData, material, time, record, pIndex;
-var globalString, globalSubtitle, globalURL;
+var uniforms, container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, clock, repoData, material, time, record, pIndex;
+var globalString, globalSubtitle, globalURL, geometryBall, sphere;
 var myCoolBool = false;
-var geometryBall, sphere;
 var colors = ['#000000', '#A55C1B', '#485461', '#233329', '#3F0D12', '#023047'];
 var indexColor = 0;
+var btnElement = document.getElementById("next");
+var backElement = document.getElementById("back");
 
 function init() {
   container = document.querySelector(".container");
@@ -43879,9 +43879,6 @@ function createDance() {
   scene.add(sphere);
   sphere.position.y = -1.3;
 }
-
-var btnElement = document.getElementById("next");
-var backElement = document.getElementById("back");
 
 function hideArrow() {
   var arrowAnimation = document.getElementById("arrowtxt");
@@ -44016,7 +44013,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59165" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62420" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

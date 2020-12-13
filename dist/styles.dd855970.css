@@ -436,6 +436,10 @@ fill: white;
 .social-svg:hover {
     fill: purple;
 }
+path{
+width: 5rem;
+height: 5rem;
+}
 .resume{
     display:flex;
     justify-content: center;

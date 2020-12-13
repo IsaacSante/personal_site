@@ -32580,7 +32580,7 @@ var Sketch = function Sketch(p) {
       var x = (pg.random(pg.width) + p.frameCount) % (pg.width + txtSize) - pg.width / 2;
       var y = i * 40;
       pg.fill(255);
-      pg.textSize(50);
+      pg.textSize(40);
       pg.text('DIGTAL SPACES PHYSICAL BODIES', -x, y);
     }
 
@@ -32618,7 +32618,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59165" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62420" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

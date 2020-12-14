@@ -420,46 +420,45 @@ width:40%;
     font-size: 1.4rem;
 }
 .social {
-    padding-top: 3rem;
+    padding-top: 1.7rem;
     display:flex;
     justify-content: center;
 }
-.social svg{
-    padding:.2rem;
-    margin-left: 1.5rem;
-}
-.social-svg {
-width: 5rem;
-height: 5rem;
-fill: white;
-}
-.social-svg:hover {
+svg:hover {
     fill: purple;
 }
-path{
-width: 5rem;
-height: 5rem;
+.github {
+    background-image: url(../images/github.svg);
 }
-.resume{
-    display:flex;
-    justify-content: center;
+.link {
+    background-image: url(../images/link.svg);
 }
-.resume-btn {
-padding-top: 1rem;
- position:relative;
+.insta {
+    background-image: url(../images/instagram.svg);
 }
-.email {
-    display: flex;
-    align-items: center;
-   justify-content: center; 
+.github, .link, .insta {
+    padding:.2rem;
+    margin-left: 1.5rem;
+    width: 4rem;
+    height: 4rem;
+    background-size:100% 100%;
+}
+.github:hover, .link:hover, .insta:hover{
+    filter: brightness(0) saturate(100%) invert(8%) sepia(78%) saturate(7052%) hue-rotate(297deg) brightness(85%) contrast(105%);
 }
 .case-study-info p{
 padding-top:10rem;
 }
-
 .year, .Role {
     font-size: 1.3rem;
 }
+.email {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    font-size: 0.5rem;
+ }
+
 @media (max-width: 30em) {
   body {
    overflow: visible;

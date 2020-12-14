@@ -60,35 +60,37 @@ padding-bottom: 1rem;
     opacity: 0%;
 }
  .next{
+  padding: 1rem;
+  background-image: url(../images/next.svg);
+  background-size:100% 100%;
   background-position: center;
   background-size: cover;
-  width: 5%;
-  fill: white;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin: 0;
   position: absolute;
   top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  filter: invert(100%);
 } 
 .back{
+   padding: 1rem;
+    background-image: url(../images/next.svg);
+    background-size:100% 100%;
     background-position: center;
     background-size: cover;
-    width: 5%;
-    fill: white;
-    width: 3rem;
-    height: 3rem;
-     margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0;
+    position: absolute;
+    top: 50%;
     transform: scaleX(-1);
+    filter: invert(100%);
 }
+
 .next:hover, .back:hover {
-    fill: purple;
+    filter: brightness(0) saturate(100%) invert(8%) sepia(78%) saturate(7052%) hue-rotate(297deg) brightness(85%) contrast(105%);
 }
+
 .next-ctn{
     width: 5%;
     fill: white;
@@ -119,7 +121,7 @@ padding-bottom: 1rem;
    -webkit-text-stroke-color: white;  
 }
 
-.live:hover, .nxt-project:hover, .resume-btn:hover {
+.live:hover, .resume-btn:hover {
 -webkit-text-stroke-width: 0;  
 border-bottom-color: transparent;
 background-image: linear-gradient(90deg,#06e,#53a); 
@@ -160,6 +162,21 @@ margin-left: 2%;
     padding: 1rem;
     font-size: 2rem;
     position: relative;
+}
+
+.nxt-project{
+    padding: 1rem;
+    background-image: url(../images/next.svg);
+    background-size:100% 100%;
+    filter: invert(100%);
+}
+
+.nxt-project:hover{
+    filter: brightness(0) saturate(100%) invert(8%) sepia(78%) saturate(7052%) hue-rotate(297deg) brightness(85%) contrast(105%);
+}
+
+.but-back{
+    transform: scaleX(-1);
 }
 
 @keyframes backgroundPositionShift {
@@ -541,13 +558,27 @@ padding-top:10rem;
   body {
    overflow: visible;
   }
+
+  .tech-stack {
+    padding-top:2rem;
+    width: 100%;
+    }
+
+  .tech-stack p{
+    font-size: 0.7rem;  
+  }
+
+
+  .wrapper-cont{
+    padding: 5px 1%;
+  }
   header {
       justify-content: start;
      padding: 10px 1%;
   }
   .logo{
     padding: 5px 10px;
-    width:4em;
+    width:3em;
     margin-right: auto;
   }
   .nav-links li {
@@ -557,13 +588,18 @@ padding-top:10rem;
 li, a {
     font-family: "Montserrat", sans-serif;
     font-weight:lighter;  
-    font-size: 30px;
+    font-size: 22px;
     color: #edf0f1;
     text-decoration: none;
 }
-
+.current{
+    display: none;
+}
+.d{
+    width: 100%;
+}
 .ProjectName{
-font-size: 4rem;
+font-size: 3rem;
 width:100%;
 padding-bottom:2rem;
 }
@@ -580,12 +616,14 @@ width:100%
 }
 .case-study {
     flex-direction: column;
+    padding: 5px 1%;
 }
 .descriptors{
     flex-direction: column;
 }
 .img-handler {
 padding-top: 2rem;
+width: 100%;
 }
 .img-handler img {
     width:100%;
@@ -595,14 +633,10 @@ padding:1rem;
 width:100%;
 font-size: 1.2rem;
 }
-.tech-stack {
-padding-top:2rem;
-}
 .year {
 padding:1rem;
 padding-top:1rem;
 display:flex;
-justify-content: flex-end;
 }
 .right h1{
    font-size: 4rem; 

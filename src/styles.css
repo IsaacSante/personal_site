@@ -401,6 +401,7 @@ width:40%;
 }
 .d{
     width: 80%;
+    line-height: 180%;
 }
 .extra-cont{
     display:flex;

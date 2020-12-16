@@ -375,8 +375,13 @@ width:40%
 .img-handler {
  display: flex;
  flex-direction: column ;
- width: 100%;
+ width: 90%;
 }
+
+.img-handler img{
+    max-height: 50vh;
+}
+
 .extracase {
  display: flex;
  flex-direction: column ;

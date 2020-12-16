@@ -8,23 +8,31 @@ body {
     background: #000000;
     font-family: 'Montserrat', sans-serif;
     src: url("/Montserrat-Regular.49544808.otf") format("opentype");
-    font-size: 130%;
+    font-size: 120%;
     color:white;
     overflow-x: hidden;
 }
-iframe { 
-border: none; 
-padding-bottom: 1rem;
-}
-.newFrame{
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+
+
+.background-img{
+    z-index: -10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: hidden;
+    opacity: 20%;
 }
 
-.data-viz{
-    height: 400px;
+
+
+iframe { 
+border: none; 
+padding: 1rem;
+display: flex;
+justify-content: flex-end;
+
 }
   #spinner{
     visibility: visible;
@@ -287,11 +295,34 @@ padding-bottom:4rem;
        padding:1rem;
 }
 
+.current li{
+display: inline-block;
+padding: 0px 20px;
+font-size: 12px;
+}
+
+.current a{
+  color: #2f2f2f;
+  font-size: 1rem;
+}
+
 .defaults{
     text-decoration: none;
     font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.yandr {
+    font-size: 1.1rem;
+}
+
+
+.type-title {
+    font-weight: 600;
 }
 .Subtitle{
+    font-weight: 600;
     font-size: 1.8rem;
 }
 .Description {
@@ -340,10 +371,11 @@ width:40%
     99%{    color:transparent;  }
     100%{   color: #FFFEF2;    }
 }
+
 .img-handler {
  display: flex;
  flex-direction: column ;
- width: 75%;
+ width: 100%;
 }
 .extracase {
  display: flex;
@@ -358,23 +390,14 @@ font-size: 1.5rem;
 padding:1rem;
 width:40%;
 }
-.tech-stack {
- display: flex;
- flex-direction: column ; 
- line-height: 200%;
- padding: 0.5rem;
- width: 60%;
-}
-.tech-stack p{
+ .tech-stack {
     display: flex;
-    justify-content: center;
-    border: 0.1rem solid;
-    border-color: white;
-    border-radius: 50px;
-    background: white;
-    margin-bottom: 0.8rem;
-    color: #0b132b;
+} 
+
+.tech-stack p{
+    color: white;
     font-size: 1rem;
+    margin-left: 0.2rem;
 }
 
 .fade-in{
@@ -482,9 +505,9 @@ width:40%;
     flex-grow: 1;
 }
 .right-cont{
-    display: flex;
-    flex-basis: 0;
-   min-width: 50%;
+display: flex;
+flex-basis: 0;
+min-width: 50%;
  justify-content: flex-end;
 }
 .right p {
@@ -494,6 +517,7 @@ width:40%;
     font-size: 1.6rem;
 }
 .d{
+    padding: 1rem;
     width: 80%;
     line-height: 180%;
 }
@@ -510,9 +534,11 @@ width:40%;
     flex-grow: 1;
 }
 .floaty{
+    padding: 1rem;
     margin-top: 1rem;
     text-decoration: none;
     font-size: 1.4rem;
+    font-weight: 600;
 }
 .social {
     padding-top: 1.7rem;
@@ -554,6 +580,10 @@ padding-top:10rem;
     font-size: 0.5rem;
  }
 
+
+
+
+
 @media (max-width: 30em) {
   body {
    overflow: visible;
@@ -580,6 +610,7 @@ padding-top:10rem;
     padding: 5px 10px;
     width:3em;
     margin-right: auto;
+
   }
   .nav-links li {
     display: inline-block;
@@ -595,6 +626,7 @@ li, a {
 .current{
     display: none;
 }
+
 .d{
     width: 100%;
 }
@@ -624,9 +656,11 @@ width:100%
 .img-handler {
 padding-top: 2rem;
 width: 100%;
+height: 100%;
 }
 .img-handler img {
     width:100%;
+    height: 100%;
 }
 .extra-info {
 padding:1rem;

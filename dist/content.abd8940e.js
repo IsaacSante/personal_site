@@ -7227,9 +7227,6 @@ base('Work').select({
     return x.fields.Slug === record[0].fields.Slug;
   });
   record = record[0].fields;
-  console.log(projectLocation);
-  var current = document.getElementById("current");
-  current.innerHTML = 'Project ' + projectLocation + ' - ' + record["Main Category"];
   document.body.style.backgroundColor = record.backgroundColor;
   createInterface(record, records);
 }, function done(err) {
@@ -7240,6 +7237,17 @@ base('Work').select({
 });
 
 function createInterface(record, records) {
+  var links = document.getElementsByTagName("a");
+  var found;
+
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].innerHTML === record["Project Name"]) {
+      found = links[i];
+      found.style.color = 'white';
+      found.style.textDecoration = "underline";
+    }
+  }
+
   var Pname = document.getElementById("ProjectName");
   var Pyear = document.getElementById("year");
   var Psub = document.getElementById("Subtitle");
@@ -7250,19 +7258,18 @@ function createInterface(record, records) {
   var nextProjectSrc = document.getElementById("next-work-link");
   var backProjectSrc = document.getElementById("back-work-link");
   Pname.innerHTML = record["Project Name"];
-  Pyear.innerHTML = 'Year  - ' + record.Year;
+  Pyear.innerHTML = record.Year;
   Psub.innerHTML = record.Subtitle;
   Pdesc.innerHTML = record.Description;
-  Prole.innerHTML = 'Role  - ' + record.Role;
+  Prole.innerHTML = record.Role;
   PfinalProjectSrc.href = record["Project Final Src"];
   Pproccess.innerHTML = record.Process;
   var techLength = record.Technology.length;
 
   for (i = 0; i < techLength; i++) {
     var txtNode = document.createElement("P");
-    txtNode.innerHTML = record.Technology[i];
+    txtNode.innerHTML = record.Technology[i] + ' /';
     document.getElementById("tech-stack").appendChild(txtNode);
-    txtNode.style.color = record.backgroundColor;
   }
 
   if (record.viz) {
@@ -7273,18 +7280,20 @@ function createInterface(record, records) {
   }
 
   if (record.yt) {
+    var targetWidth = document.getElementById('img-handler').offsetWidth;
     var vidLink1 = document.createElement('iframe');
-    vidLink1.width = "560";
-    vidLink1.height = "315";
+    vidLink1.width = targetWidth;
+    vidLink1.height = targetWidth * 0.5625;
     vidLink1.src = record.yt;
     document.getElementById('img-handler').appendChild(vidLink1);
     vidLink1.setAttribute('allowFullScreen', '');
   }
 
   if (record["Extra Links"]) {
+    var targetWidth = document.getElementById('img-handler').offsetWidth;
     var vidLink = document.createElement('iframe');
-    vidLink.width = "560";
-    vidLink.height = "315";
+    vidLink.width = targetWidth;
+    vidLink.height = targetWidth * 0.5625;
     vidLink.src = record["Extra Links"];
     document.getElementById('img-handler').appendChild(vidLink);
     vidLink.setAttribute('allowFullScreen', '');
@@ -7348,7 +7357,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51754" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55703" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

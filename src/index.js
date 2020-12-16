@@ -12,30 +12,35 @@ import {
       TextBufferGeometry,
       MeshBasicMaterial,
       SphereGeometry,
+      BoxGeometry,
+      TetrahedronGeometry,
+      DodecahedronGeometry,
   } from "three";
 
   import fragmentShader from "./shaders/fragment.glsl"
   import vertexShader from "./shaders/vertex.glsl";
-  
+
   var Airtable = require("airtable");
   var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
   'appvMjgA3Di00eDev'
  );
 
   let uniforms, container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, clock, repoData, material, time, record, pIndex;
-  let globalString, globalSubtitle, globalURL, geometryBall, sphere;
+  let globalString, globalSubtitle, globalURL, sphere, bgImg;
   let myCoolBool = false;
-  let colors = ['#000000', '#A55C1B', '#485461', '#233329', '#3F0D12', '#023047'];
+  let colors = ['#000000','#A55C1B','#485461','#655B50','#517FA4'];
   var indexColor = 0; 
   let btnElement = document.getElementById("next");
   let backElement = document.getElementById("back");
+  let geometryBall = new SphereGeometry(0.4, 8, -30);
+  let geometries = [ new SphereGeometry(0.4, 8, -30), new SphereGeometry( 0.4, 16, 16 ), new BoxGeometry(0.4, 0.4, 0.4), new TetrahedronGeometry (0.4), new DodecahedronGeometry (0.4) ]; 
 
   function init () {
-    container = document.querySelector(".container");
-    scene = new Scene();
-    clock = new Clock();
-    time = 0;
-    const spinner = document.getElementById("spinner");
+        container = document.querySelector(".container");
+        scene = new Scene();
+        clock = new Clock();
+        time = 0;
+        const spinner = document.getElementById("spinner");
 
       function hideSpinner() {
       spinner.classList.add("hide");
@@ -49,6 +54,8 @@ import {
               globalString = record.fields['Project Name'];
               globalSubtitle = record.fields.Subtitle;
               globalURL = 'info.html'
+              bgImg = record.fields.Img1[0].url
+              document.getElementById("background-img").src = bgImg 
           createGeometry();
 
         }, function done(err) {
@@ -129,11 +136,8 @@ import {
       }
 
     function createDance() {
-        geometryBall = new SphereGeometry(0.4, 8, -30);
         geometryBall.center();
-
-        const material1 = new MeshBasicMaterial( {color: 0xFFFFFF, wireframe: true,} );
-
+        let material1 = new MeshBasicMaterial( {color: 0xFFFFFF, wireframe: true,} );
         sphere = new Mesh( geometryBall, material1 );
         sphere.name = 'Spheres'
         scene.add( sphere );
@@ -151,30 +155,34 @@ import {
             arrowAnimation.classList.add("show");
     }
 
-
   if(btnElement){
       btnElement.addEventListener("click", () => {
         indexColor ++ 
-        if (indexColor > 5 ) {
+        if (indexColor > 4 ) {
             indexColor = 0
         }
-
           document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor]
-          scene.remove( mesh );
-          scene.remove( mesh2 );
-          pIndex = (pIndex + 1) % repoData.length;
-          record = repoData[pIndex];
-          globalString = record.fields['Project Name'];
-          globalSubtitle = record.fields.Subtitle;
+          scene.remove( mesh )
+          scene.remove( mesh2 )
+          pIndex = (pIndex + 1) % repoData.length
+          record = repoData[pIndex]
+          globalString = record.fields['Project Name']
+          globalSubtitle = record.fields.Subtitle
+          bgImg = record.fields.Img1[0].url
+          document.getElementById("background-img").src = bgImg 
 
           if(pIndex > 0){
-              globalURL = 'content.html?' + record.fields.Slug;
+              globalURL = 'content.html?' + record.fields.Slug
               showArrow();
           }else{
               globalURL = 'info.html'
               hideArrow();
           }
-          createGeometry();
+
+          createGeometry()
+          scene.remove( sphere )
+          geometryBall = geometries[indexColor]
+          createDance()
       });
    }
 
@@ -198,6 +206,8 @@ import {
                 record = repoData[pIndex];
                 globalString = record.fields['Project Name'];
                 globalSubtitle = record.fields.Subtitle;
+                bgImg = record.fields.Img1[0].url
+                document.getElementById("background-img").src = bgImg 
 
                 if(pIndex > 0){
                   globalURL = 'content.html?' + record.fields.Slug;
@@ -207,6 +217,9 @@ import {
                     hideArrow();
                 }
                 createGeometry();
+                scene.remove( sphere )
+                geometryBall = geometries[indexColor]
+                createDance()
         });
      }
 

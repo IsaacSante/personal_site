@@ -43747,12 +43747,14 @@ var base = new Airtable({
   apiKey: "keyMKnZBFsdFtC0UX"
 }).base('appvMjgA3Di00eDev');
 var uniforms, container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, clock, repoData, material, time, record, pIndex;
-var globalString, globalSubtitle, globalURL, geometryBall, sphere;
+var globalString, globalSubtitle, globalURL, sphere, bgImg;
 var myCoolBool = false;
-var colors = ['#000000', '#A55C1B', '#485461', '#233329', '#3F0D12', '#023047'];
+var colors = ['#000000', '#A55C1B', '#485461', '#655B50', '#517FA4'];
 var indexColor = 0;
 var btnElement = document.getElementById("next");
 var backElement = document.getElementById("back");
+var geometryBall = new _three.SphereGeometry(0.4, 8, -30);
+var geometries = [new _three.SphereGeometry(0.4, 8, -30), new _three.SphereGeometry(0.4, 16, 16), new _three.BoxGeometry(0.4, 0.4, 0.4), new _three.TetrahedronGeometry(0.4), new _three.DodecahedronGeometry(0.4)];
 
 function init() {
   container = document.querySelector(".container");
@@ -43776,6 +43778,8 @@ function init() {
     globalString = record.fields['Project Name'];
     globalSubtitle = record.fields.Subtitle;
     globalURL = 'info.html';
+    bgImg = record.fields.Img1[0].url;
+    document.getElementById("background-img").src = bgImg;
     createGeometry();
   }, function done(err) {
     if (err) {
@@ -43868,7 +43872,6 @@ function createGeometry() {
 }
 
 function createDance() {
-  geometryBall = new _three.SphereGeometry(0.4, 8, -30);
   geometryBall.center();
   var material1 = new _three.MeshBasicMaterial({
     color: 0xFFFFFF,
@@ -43895,7 +43898,7 @@ if (btnElement) {
   btnElement.addEventListener("click", function () {
     indexColor++;
 
-    if (indexColor > 5) {
+    if (indexColor > 4) {
       indexColor = 0;
     }
 
@@ -43906,6 +43909,8 @@ if (btnElement) {
     record = repoData[pIndex];
     globalString = record.fields['Project Name'];
     globalSubtitle = record.fields.Subtitle;
+    bgImg = record.fields.Img1[0].url;
+    document.getElementById("background-img").src = bgImg;
 
     if (pIndex > 0) {
       globalURL = 'content.html?' + record.fields.Slug;
@@ -43916,6 +43921,9 @@ if (btnElement) {
     }
 
     createGeometry();
+    scene.remove(sphere);
+    geometryBall = geometries[indexColor];
+    createDance();
   });
 }
 
@@ -43939,6 +43947,8 @@ if (backElement) {
     record = repoData[pIndex];
     globalString = record.fields['Project Name'];
     globalSubtitle = record.fields.Subtitle;
+    bgImg = record.fields.Img1[0].url;
+    document.getElementById("background-img").src = bgImg;
 
     if (pIndex > 0) {
       globalURL = 'content.html?' + record.fields.Slug;
@@ -43949,6 +43959,9 @@ if (backElement) {
     }
 
     createGeometry();
+    scene.remove(sphere);
+    geometryBall = geometries[indexColor];
+    createDance();
   });
 }
 
@@ -44013,7 +44026,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51754" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55703" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

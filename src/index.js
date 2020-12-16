@@ -25,15 +25,16 @@ import {
   'appvMjgA3Di00eDev'
  );
 
-  let uniforms, container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, clock, repoData, material, time, record, pIndex;
+  let uniforms, container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
   let globalString, globalSubtitle, globalURL, sphere, bgImg;
+  let enterString = ""
   let myCoolBool = false;
   let colors = ['#000000','#A55C1B','#485461','#655B50','#517FA4'];
   var indexColor = 0; 
   let btnElement = document.getElementById("next");
   let backElement = document.getElementById("back");
-  let geometryBall = new SphereGeometry(0.4, 8, -30);
-  let geometries = [ new SphereGeometry(0.4, 8, -30), new SphereGeometry( 0.4, 16, 16 ), new BoxGeometry(0.4, 0.4, 0.4), new TetrahedronGeometry (0.4), new DodecahedronGeometry (0.4) ]; 
+  let geometryBall = new SphereGeometry(0.5, 8, -30);
+  let geometries = [ new SphereGeometry(0.5, 8, -30), new SphereGeometry( 0.5, 16, 16 ), new BoxGeometry(0.5, 0.5, 0.5), new TetrahedronGeometry (0.5), new DodecahedronGeometry (0.5) ]; 
 
   function init () {
         container = document.querySelector(".container");
@@ -110,6 +111,15 @@ import {
 
               geometry2.center();
               geometry2.translate( 0, 0, -0.3);
+              
+               geometry3 = new TextBufferGeometry(enterString, {
+                  font: font,
+                  size: 0.08,
+                  height: 0,
+              } );
+
+              geometry3.center();
+              geometry3.translate( 0, -1.3, -0.2);
 
               uniforms = {
                   uTime: { value: 0.0 },
@@ -128,8 +138,10 @@ import {
 
               mesh = new Mesh(geometry, material);
               mesh2 = new Mesh(geometry2, material);
+              mesh3 = new Mesh(geometry3, material);
               scene.add(mesh);
               scene.add(mesh2);
+              scene.add(mesh3);
               myCoolBool = true;
 
           } );
@@ -141,18 +153,8 @@ import {
         sphere = new Mesh( geometryBall, material1 );
         sphere.name = 'Spheres'
         scene.add( sphere );
-        sphere.position.y = -1.3; 
-    }
-
-   function hideArrow() {
-      let arrowAnimation = document.getElementById("arrowtxt");
-        arrowAnimation.classList.add("hide");
-   }
-
-    function showArrow() {
-        let arrowAnimation = document.getElementById("arrowtxt");
-            arrowAnimation.classList.remove("hide");
-            arrowAnimation.classList.add("show");
+        sphere.position.z = 0.2; 
+        sphere.position.y = -1.2; 
     }
 
   if(btnElement){
@@ -164,6 +166,7 @@ import {
           document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor]
           scene.remove( mesh )
           scene.remove( mesh2 )
+          scene.remove( mesh3 )
           pIndex = (pIndex + 1) % repoData.length
           record = repoData[pIndex]
           globalString = record.fields['Project Name']
@@ -172,11 +175,11 @@ import {
           document.getElementById("background-img").src = bgImg 
 
           if(pIndex > 0){
+              enterString = "-ENTER-"
               globalURL = 'content.html?' + record.fields.Slug
-              showArrow();
           }else{
+              enterString = ""
               globalURL = 'info.html'
-              hideArrow();
           }
 
           createGeometry()
@@ -195,8 +198,9 @@ import {
               indexColor --
 
                 document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor]
-                scene.remove( mesh );
-                scene.remove( mesh2 );
+                scene.remove( mesh )
+                scene.remove( mesh2 )
+                scene.remove( mesh3 )
 
                 if (pIndex == 0 ){
                     pIndex = repoData.length - 1;
@@ -210,11 +214,13 @@ import {
                 document.getElementById("background-img").src = bgImg 
 
                 if(pIndex > 0){
+                  enterString = "-ENTER-"
                   globalURL = 'content.html?' + record.fields.Slug;
-                  showArrow();
+                  // showArrow();
                 }else{
+                   enterString = ""
                     globalURL = 'info.html'
-                    hideArrow();
+                    // hideArrow();
                 }
                 createGeometry();
                 scene.remove( sphere )

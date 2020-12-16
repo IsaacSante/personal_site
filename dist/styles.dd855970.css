@@ -13,7 +13,6 @@ body {
     overflow-x: hidden;
 }
 
-
 .background-img{
     z-index: -10;
     position: absolute;
@@ -24,8 +23,6 @@ body {
     border: hidden;
     opacity: 20%;
 }
-
-
 
 iframe { 
 border: none; 

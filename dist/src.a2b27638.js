@@ -43746,15 +43746,16 @@ var Airtable = require("airtable");
 var base = new Airtable({
   apiKey: "keyMKnZBFsdFtC0UX"
 }).base('appvMjgA3Di00eDev');
-var uniforms, container, scene, camera, renderer, mesh, mesh2, geometry, geometry2, clock, repoData, material, time, record, pIndex;
+var uniforms, container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
 var globalString, globalSubtitle, globalURL, sphere, bgImg;
+var enterString = "";
 var myCoolBool = false;
 var colors = ['#000000', '#A55C1B', '#485461', '#655B50', '#517FA4'];
 var indexColor = 0;
 var btnElement = document.getElementById("next");
 var backElement = document.getElementById("back");
-var geometryBall = new _three.SphereGeometry(0.4, 8, -30);
-var geometries = [new _three.SphereGeometry(0.4, 8, -30), new _three.SphereGeometry(0.4, 16, 16), new _three.BoxGeometry(0.4, 0.4, 0.4), new _three.TetrahedronGeometry(0.4), new _three.DodecahedronGeometry(0.4)];
+var geometryBall = new _three.SphereGeometry(0.5, 8, -30);
+var geometries = [new _three.SphereGeometry(0.5, 8, -30), new _three.SphereGeometry(0.5, 16, 16), new _three.BoxGeometry(0.5, 0.5, 0.5), new _three.TetrahedronGeometry(0.5), new _three.DodecahedronGeometry(0.5)];
 
 function init() {
   container = document.querySelector(".container");
@@ -43837,6 +43838,13 @@ function createGeometry() {
     });
     geometry2.center();
     geometry2.translate(0, 0, -0.3);
+    geometry3 = new _three.TextBufferGeometry(enterString, {
+      font: font,
+      size: 0.08,
+      height: 0
+    });
+    geometry3.center();
+    geometry3.translate(0, -1.3, -0.2);
     uniforms = {
       uTime: {
         value: 0.0
@@ -43865,8 +43873,10 @@ function createGeometry() {
     });
     mesh = new _three.Mesh(geometry, material);
     mesh2 = new _three.Mesh(geometry2, material);
+    mesh3 = new _three.Mesh(geometry3, material);
     scene.add(mesh);
     scene.add(mesh2);
+    scene.add(mesh3);
     myCoolBool = true;
   });
 }
@@ -43880,18 +43890,8 @@ function createDance() {
   sphere = new _three.Mesh(geometryBall, material1);
   sphere.name = 'Spheres';
   scene.add(sphere);
-  sphere.position.y = -1.3;
-}
-
-function hideArrow() {
-  var arrowAnimation = document.getElementById("arrowtxt");
-  arrowAnimation.classList.add("hide");
-}
-
-function showArrow() {
-  var arrowAnimation = document.getElementById("arrowtxt");
-  arrowAnimation.classList.remove("hide");
-  arrowAnimation.classList.add("show");
+  sphere.position.z = 0.2;
+  sphere.position.y = -1.2;
 }
 
 if (btnElement) {
@@ -43905,6 +43905,7 @@ if (btnElement) {
     document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor];
     scene.remove(mesh);
     scene.remove(mesh2);
+    scene.remove(mesh3);
     pIndex = (pIndex + 1) % repoData.length;
     record = repoData[pIndex];
     globalString = record.fields['Project Name'];
@@ -43913,11 +43914,11 @@ if (btnElement) {
     document.getElementById("background-img").src = bgImg;
 
     if (pIndex > 0) {
+      enterString = "-ENTER-";
       globalURL = 'content.html?' + record.fields.Slug;
-      showArrow();
     } else {
+      enterString = "";
       globalURL = 'info.html';
-      hideArrow();
     }
 
     createGeometry();
@@ -43937,6 +43938,7 @@ if (backElement) {
     document.getElementsByTagName("body")[0].style.backgroundColor = colors[indexColor];
     scene.remove(mesh);
     scene.remove(mesh2);
+    scene.remove(mesh3);
 
     if (pIndex == 0) {
       pIndex = repoData.length - 1;
@@ -43951,11 +43953,11 @@ if (backElement) {
     document.getElementById("background-img").src = bgImg;
 
     if (pIndex > 0) {
-      globalURL = 'content.html?' + record.fields.Slug;
-      showArrow();
+      enterString = "-ENTER-";
+      globalURL = 'content.html?' + record.fields.Slug; // showArrow();
     } else {
-      globalURL = 'info.html';
-      hideArrow();
+      enterString = "";
+      globalURL = 'info.html'; // hideArrow();
     }
 
     createGeometry();
@@ -44026,7 +44028,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61213" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49197" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

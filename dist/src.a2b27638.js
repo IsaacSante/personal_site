@@ -43748,7 +43748,7 @@ var base = new Airtable({
 }).base('appvMjgA3Di00eDev');
 var uniforms, container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
 var globalString, globalSubtitle, globalURL, sphere, bgImg;
-var enterString = "";
+var enterString = "Welcome";
 var myCoolBool = false;
 var colors = ['#000000', '#A55C1B', '#485461', '#655B50', '#517FA4'];
 var indexColor = 0;
@@ -43914,10 +43914,10 @@ if (btnElement) {
     document.getElementById("background-img").src = bgImg;
 
     if (pIndex > 0) {
-      enterString = "-ENTER-";
+      enterString = "Enter";
       globalURL = 'content.html?' + record.fields.Slug;
     } else {
-      enterString = "";
+      enterString = "Welcome";
       globalURL = 'info.html';
     }
 
@@ -43953,11 +43953,11 @@ if (backElement) {
     document.getElementById("background-img").src = bgImg;
 
     if (pIndex > 0) {
-      enterString = "-ENTER-";
-      globalURL = 'content.html?' + record.fields.Slug; // showArrow();
+      enterString = "Enter";
+      globalURL = 'content.html?' + record.fields.Slug;
     } else {
-      enterString = "";
-      globalURL = 'info.html'; // hideArrow();
+      enterString = "Welcome";
+      globalURL = 'info.html';
     }
 
     createGeometry();
@@ -44028,7 +44028,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49197" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62325" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

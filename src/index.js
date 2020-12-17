@@ -27,7 +27,7 @@ import {
 
   let uniforms, container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
   let globalString, globalSubtitle, globalURL, sphere, bgImg;
-  let enterString = ""
+  let enterString = "Welcome"
   let myCoolBool = false;
   let colors = ['#000000','#A55C1B','#485461','#655B50','#517FA4'];
   var indexColor = 0; 
@@ -74,14 +74,14 @@ import {
       const aspect = container.clientWidth / container.clientHeight;
       camera = new PerspectiveCamera(100, aspect, 0.1, 1000);
       camera.position.set(0, -0.5, 3);
-  }
+    }
 
   function createLights() {
       const directionalLight = new DirectionalLight(0xffffff, 5);
       directionalLight.position.set(5, 5, 10);
       const hemisphereLight = new HemisphereLight(0xddeeff, 0x202020, 3);
       scene.add(directionalLight, hemisphereLight);
-  }
+    }
 
   function createRenderer() {
         renderer = new WebGLRenderer({ antialias: true, alpha: true});
@@ -92,7 +92,8 @@ import {
         container.appendChild(renderer.domElement);
         renderer.setPixelRatio(window.devicePixelRatio || 1);
   }
-    function createGeometry() {
+
+  function createGeometry() {
         var loader = new FontLoader();
           loader.load( 'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
               geometry = new TextBufferGeometry(globalString, {
@@ -145,7 +146,7 @@ import {
               myCoolBool = true;
 
           } );
-      }
+    }
 
     function createDance() {
         geometryBall.center();
@@ -175,10 +176,10 @@ import {
           document.getElementById("background-img").src = bgImg 
 
           if(pIndex > 0){
-              enterString = "-ENTER-"
+              enterString = "Enter"
               globalURL = 'content.html?' + record.fields.Slug
           }else{
-              enterString = ""
+              enterString = "Welcome"
               globalURL = 'info.html'
           }
 
@@ -214,13 +215,11 @@ import {
                 document.getElementById("background-img").src = bgImg 
 
                 if(pIndex > 0){
-                  enterString = "-ENTER-"
+                  enterString = "Enter"
                   globalURL = 'content.html?' + record.fields.Slug;
-                  // showArrow();
                 }else{
-                   enterString = ""
+                   enterString = "Welcome"
                     globalURL = 'info.html'
-                    // hideArrow();
                 }
                 createGeometry();
                 scene.remove( sphere )

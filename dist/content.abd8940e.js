@@ -7209,8 +7209,13 @@ function () {
 module.exports = Airtable;
 },{"./base":"node_modules/airtable/lib/base.js","./record":"node_modules/airtable/lib/record.js","./table":"node_modules/airtable/lib/table.js","./airtable_error":"node_modules/airtable/lib/airtable_error.js"}],"src/content.js":[function(require,module,exports) {
 var projectLocation, record;
+var blackHidder = document.getElementById("black");
 
 var Airtable = require("airtable");
+
+function hideSpinner() {
+  blackHidder.classList.add("hide");
+}
 
 var base = new Airtable({
   apiKey: "keyMKnZBFsdFtC0UX"
@@ -7227,6 +7232,7 @@ base('Work').select({
     return x.fields.Slug === record[0].fields.Slug;
   });
   record = record[0].fields;
+  hideSpinner();
   document.body.style.backgroundColor = record.backgroundColor;
   createInterface(record, records);
 }, function done(err) {
@@ -7357,7 +7363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49197" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62325" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

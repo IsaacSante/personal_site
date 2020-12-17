@@ -1,5 +1,9 @@
 let projectLocation, record;
+const blackHidder = document.getElementById("black");
 var Airtable = require("airtable");
+  function hideSpinner() {
+    blackHidder.classList.add("hide");
+    }
 var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
 'appvMjgA3Di00eDev'
 );  
@@ -11,6 +15,7 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
     record = records.filter(x => x.fields.Slug == searchParam)
     projectLocation = records.findIndex(x => x.fields.Slug === record[0].fields.Slug)
     record = record[0].fields
+    hideSpinner()
     document.body.style.backgroundColor = record.backgroundColor
     createInterface(record, records)
   }, function done(err) {

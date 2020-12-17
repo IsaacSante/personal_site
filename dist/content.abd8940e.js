@@ -117,7 +117,89 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/lodash/_arrayEach.js":[function(require,module,exports) {
+})({"node_modules/cursor-dot/index.js":[function(require,module,exports) {
+const $$ = s =>
+  Array.prototype.slice.call(
+    document.querySelectorAll(s)
+  )
+const isEl = obj => obj instanceof HTMLElement
+const isStr = obj => Object.prototype.toString.call(obj) === '[object String]'
+
+const cursorDot = ({
+  diameter = 80,
+  borderWidth = 1,
+  borderColor = '#fff',
+  easing = 4,
+  background = 'transparent'
+} = {}) => {
+  let inited = false
+  const alt = { x: 0, y: 0, o: 1, d: diameter }
+  const cur = { x: 0, y: 0, o: 0, d: diameter }
+  const dot = document.createElement('div')
+  const tim = easing / 15
+  dot.style = `position:fixed;top:0;left:0;border-radius:100%;pointer-events:none;opacity:0;height:${diameter}px;width:${diameter}px;background:${background};border:${borderWidth}px solid ${borderColor};mix-blend-mode:exclusion;transition:background ${tim}s,border ${tim}s;will-change:transform`
+
+  document.addEventListener('mousemove', e => {
+    alt.x = e.clientX
+    alt.y = e.clientY
+    dot.style.opacity = 1
+    if (!inited) {
+      document.body.append(dot)
+      cur.x = alt.x
+      cur.y = alt.y
+      inited = true
+      draw()
+    }
+  })
+
+  const draw = () => {
+    const dX = alt.x - cur.x
+    const dY = alt.y - cur.y
+    cur.x += (dX / easing)
+    cur.y += (dY / easing)
+    const t3d = `translate3d(${cur.x - cur.d / 2}px,${cur.y - cur.d / 2}px,0)`
+    dot.style.webkitTransform = t3d
+    dot.style.transform = t3d
+
+    const dO = alt.o - cur.o
+    cur.o += dO / easing
+    dot.style.opacity = cur.o
+
+    const dD = alt.d - cur.d
+    cur.d += dD / easing
+    dot.style.height = cur.d + 'px'
+    dot.style.width = cur.d + 'px'
+
+    try {
+      requestAnimationFrame(draw)
+    } catch (_) {
+      setImmediate(draw)
+    }
+  }
+
+  dot.over = (any, style) => {
+    const fn = el => {
+      el.addEventListener('mouseover', _ => {
+        if (style.background) dot.style.backgroundColor = style.background
+        if (style.borderColor) dot.style.borderColor = style.borderColor
+        if (style.scale) alt.d = diameter * style.scale
+      })
+      el.addEventListener('mouseout', _ => {
+        if (style.background) dot.style.backgroundColor = background
+        if (style.borderColor) dot.style.borderColor = borderColor
+        if (style.scale) alt.d = diameter
+      })
+    }
+    if (isEl(any)) fn(any)
+    else if (isStr(any)) $$(any).forEach(fn)
+  }
+
+  return dot
+}
+
+module.exports = cursorDot
+
+},{}],"node_modules/lodash/_arrayEach.js":[function(require,module,exports) {
 /**
  * A specialized version of `_.forEach` for arrays without support for
  * iteratee shorthands.
@@ -7208,7 +7290,19 @@ function () {
 
 module.exports = Airtable;
 },{"./base":"node_modules/airtable/lib/base.js","./record":"node_modules/airtable/lib/record.js","./table":"node_modules/airtable/lib/table.js","./airtable_error":"node_modules/airtable/lib/airtable_error.js"}],"src/content.js":[function(require,module,exports) {
+"use strict";
+
+var _cursorDot = _interopRequireDefault(require("cursor-dot"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var projectLocation, record;
+var cursor = (0, _cursorDot.default)({
+  diameter: 60,
+  easing: 4,
+  background: '#fff'
+});
+cursor.classList.add('cursor-class');
 var blackHidder = document.getElementById("black");
 
 var Airtable = require("airtable");
@@ -7250,7 +7344,6 @@ function createInterface(record, records) {
     if (links[i].innerHTML === record["Project Name"]) {
       found = links[i];
       found.style.color = 'white';
-      found.style.textDecoration = "underline";
     }
   }
 
@@ -7335,7 +7428,7 @@ function createInterface(record, records) {
     backProjectSrc.href = backProjectHref;
   });
 }
-},{"airtable":"node_modules/airtable/lib/airtable.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"cursor-dot":"node_modules/cursor-dot/index.js","airtable":"node_modules/airtable/lib/airtable.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -7363,7 +7456,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49631" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53984" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

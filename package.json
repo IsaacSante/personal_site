@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "airtable": "^0.10.1",
+    "cursor-dot": "^1.0.5",
     "p5": "^1.1.9",
     "three": "^0.122.0"
   },

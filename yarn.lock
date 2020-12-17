@@ -1909,6 +1909,11 @@ cssstyle@^1.1.1:
   dependencies:
     cssom "0.3.x"
 
+cursor-dot@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/cursor-dot/-/cursor-dot-1.0.5.tgz#787fdc6055240eb400ab5f4bd2ba46a8ccdd271a"
+  integrity sha512-2pJ6G+h2zaY1O1jMV5+BxyZUozjfmCT2y9b580KpyIPY2yWv7ICBooQGO+DVd6ZzQvoNQ8jOdQxDPshL9370xg==
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"

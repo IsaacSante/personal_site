@@ -16,7 +16,7 @@ import {
       TetrahedronGeometry,
       DodecahedronGeometry,
   } from "three";
-
+  import curDot from 'cursor-dot'
   import fragmentShader from "./shaders/fragment.glsl"
   import vertexShader from "./shaders/vertex.glsl";
 
@@ -24,7 +24,6 @@ import {
   var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
   'appvMjgA3Di00eDev'
  );
-
   let uniforms, container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
   let globalString, globalSubtitle, globalURL, sphere, bgImg;
   let enterString = "Welcome"
@@ -35,6 +34,13 @@ import {
   let backElement = document.getElementById("back");
   let geometryBall = new SphereGeometry(0.5, 8, -30);
   let geometries = [ new SphereGeometry(0.5, 8, -30), new SphereGeometry( 0.5, 16, 16 ), new BoxGeometry(0.5, 0.5, 0.5), new TetrahedronGeometry (0.5), new DodecahedronGeometry (0.5) ]; 
+  const cursor = curDot({
+    diameter: 40,
+    easing: 4,
+    background: '#fff',
+  })
+
+  cursor.classList.add('cursor-class');
 
   function init () {
         container = document.querySelector(".container");
@@ -68,6 +74,11 @@ import {
     hideSpinner();
     createLights();
     createDance();
+
+    // cursor.over(".container", {
+    //   background: "rgba(255,255,255,.1)"
+    // });
+
  }
 
     function createCamera() {

@@ -1,6 +1,12 @@
+import curDot from 'cursor-dot'
 import p5 from "p5"
 import base from "../images/base.obj"
-
+const cursor = curDot({
+    diameter: 40,
+    easing: 5,
+    background: '#fff',
+  })
+cursor.classList.add('cursor-class');
 const canvasParent = document.getElementById("left-cont")
 let parentWidth = canvasParent.offsetWidth
 let parentHeight = canvasParent.offsetHeight

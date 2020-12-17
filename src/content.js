@@ -1,4 +1,12 @@
 let projectLocation, record;
+import curDot from 'cursor-dot'
+const cursor = curDot({
+  diameter: 60,
+  easing: 4,
+  background: '#fff',
+})
+
+cursor.classList.add('cursor-class');
 const blackHidder = document.getElementById("black");
 var Airtable = require("airtable");
   function hideSpinner() {
@@ -29,7 +37,6 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
       if(links[i].innerHTML === record["Project Name"]) {
         found = links[i];
         found.style.color = 'white'
-        found.style.textDecoration = "underline";
       } 
     }  
          let Pname = document.getElementById("ProjectName");

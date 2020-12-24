@@ -12,11 +12,13 @@ body {
     color:white;
     overflow-x: hidden;
 }
-
+.mobile-nav {
+   visibility: hidden;
+   display: none;
+}
 .cursor-class {
     mix-blend-mode: difference;
 }
-
 .background-img{
     z-index: -10;
     position: absolute;
@@ -27,7 +29,6 @@ body {
     border: hidden;
     opacity: 20%;
 }
-
 iframe { 
 border: none; 
 padding: 1rem;
@@ -72,20 +73,18 @@ justify-content: flex-end;
     background-color: black;
     z-index: 100;
 }
-
 #black.show {
     visibility: visible; 
 }
-
 #black.hide {
     visibility: hidden;
     display: none;
 }
-
 .nothing{
     opacity: 0%;
 }
- .next{
+
+.next{
   padding: 1rem;
   background-image: url(../images/next.svg);
   background-size:100% 100%;
@@ -98,6 +97,7 @@ justify-content: flex-end;
   top: 50%;
   filter: invert(100%);
 } 
+
 .back{
    padding: 1rem;
     background-image: url(../images/next.svg);
@@ -628,15 +628,27 @@ padding-top:10rem;
     font-size: 0.5rem;
  }
 
-
-
-
-
 @media (max-width: 30em) {
-  body {
+  body{
    overflow: visible;
   }
+  .background-img {
+    opacity: 15%;
+  }
+  .next{
+      top: 85%;
 
+  }
+  .back {
+    top: 85%;
+  }
+  
+  .right p {
+      font-size: 1.1rem;
+  }
+  .wrapper {
+      padding: 1%;
+  }
   .tech-stack {
     padding-top:2rem;
     width: 100%;
@@ -645,25 +657,22 @@ padding-top:10rem;
   .tech-stack p{
     font-size: 0.7rem;  
   }
-
-
   .wrapper-cont{
     padding: 5px 1%;
   }
   header {
-      justify-content: start;
      padding: 10px 1%;
   }
   .logo{
     padding: 5px 10px;
     width:3em;
     margin-right: auto;
-
   }
   .nav-links li {
     display: inline-block;
     padding: 0px 10px;
 }
+
 li, a {
     font-family: "Montserrat", sans-serif;
     font-weight:lighter;  
@@ -702,19 +711,17 @@ width:100%
     flex-direction: column;
 }
 .img-handler {
-padding-top: 2rem;
-width: 100%;
-height: 100%;
+
 }
 .img-handler img {
-    width:100%;
-    height: 100%;
+    width: 100%;
 }
 .extra-info {
 padding:1rem;
 width:100%;
 font-size: 1.2rem;
 }
+
 .year {
 padding:1rem;
 padding-top:1rem;

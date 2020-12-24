@@ -43830,6 +43830,16 @@ var Airtable = require("airtable");
 var base = new Airtable({
   apiKey: "keyMKnZBFsdFtC0UX"
 }).base('appvMjgA3Di00eDev');
+var initTextSize = 0.7;
+var yPosShift = 0;
+var kick = 0;
+
+if (window.innerWidth < 750) {
+  initTextSize = 0.32;
+  yPosShift = 0.5;
+  kick = -0.08;
+}
+
 var uniforms, container, scene, camera, renderer, mesh, mesh2, mesh3, geometry, geometry2, geometry3, clock, repoData, material, time, record, pIndex;
 var globalString, globalSubtitle, globalURL, sphere, bgImg;
 var enterString = "Welcome";
@@ -43918,25 +43928,25 @@ function createGeometry() {
   loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
     geometry = new _three.TextBufferGeometry(globalString, {
       font: font,
-      size: 0.7,
+      size: initTextSize,
       height: 0
     });
     geometry.center();
-    geometry.translate(0, 1, -0.3);
+    geometry.translate(0, 1 + yPosShift, -0.3);
     geometry2 = new _three.TextBufferGeometry(globalSubtitle, {
       font: font,
       size: 0.16,
       height: 0
     });
     geometry2.center();
-    geometry2.translate(0, 0, -0.3);
+    geometry2.translate(0, 0 + yPosShift + 3.5 * (kick * -1), -0.3);
     geometry3 = new _three.TextBufferGeometry(enterString, {
       font: font,
       size: 0.08,
       height: 0
     });
     geometry3.center();
-    geometry3.translate(0, -1.3, -0.2);
+    geometry3.translate(0, -1.3 + yPosShift, -0.2);
     uniforms = {
       uTime: {
         value: 0.0
@@ -43983,7 +43993,7 @@ function createDance() {
   sphere.name = 'Spheres';
   scene.add(sphere);
   sphere.position.z = 0.2;
-  sphere.position.y = -1.2;
+  sphere.position.y = -1.2 + yPosShift + kick;
 }
 
 if (btnElement) {
@@ -44120,7 +44130,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53984" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64361" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -633,16 +633,15 @@ padding-top:10rem;
    overflow: visible;
   }
   .background-img {
-    opacity: 15%;
+    opacity: 10%;
   }
   .next{
       top: 85%;
-
   }
   .back {
     top: 85%;
   }
-  
+
   .right p {
       font-size: 1.1rem;
   }

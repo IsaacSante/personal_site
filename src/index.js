@@ -25,10 +25,12 @@ import {
   'appvMjgA3Di00eDev'
  );
  let initTextSize = 0.7;
+ let initTxtSize2 = 0.16
  let yPosShift = 0;
  let kick = 0; 
  if (window.innerWidth < 750)  {
-  initTextSize = 0.32
+  initTextSize = 0.2
+  initTxtSize2 = 0.1
   yPosShift = 0.5;
   kick = -0.08
  }
@@ -126,7 +128,7 @@ import {
 
               geometry2 = new TextBufferGeometry(globalSubtitle, {
                   font: font,
-                  size: 0.16,
+                  size: initTxtSize2,
                   height: 0,
               } );
 

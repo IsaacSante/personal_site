@@ -43831,11 +43831,13 @@ var base = new Airtable({
   apiKey: "keyMKnZBFsdFtC0UX"
 }).base('appvMjgA3Di00eDev');
 var initTextSize = 0.7;
+var initTxtSize2 = 0.16;
 var yPosShift = 0;
 var kick = 0;
 
 if (window.innerWidth < 750) {
-  initTextSize = 0.32;
+  initTextSize = 0.2;
+  initTxtSize2 = 0.1;
   yPosShift = 0.5;
   kick = -0.08;
 }
@@ -43935,7 +43937,7 @@ function createGeometry() {
     geometry.translate(0, 1 + yPosShift, -0.3);
     geometry2 = new _three.TextBufferGeometry(globalSubtitle, {
       font: font,
-      size: 0.16,
+      size: initTxtSize2,
       height: 0
     });
     geometry2.center();
@@ -44130,7 +44132,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64361" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49982" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

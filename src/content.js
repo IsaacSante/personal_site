@@ -70,31 +70,31 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
                 vizLink.classList.add("data-viz");
             }
 
-            if(record.yt){
-             var targetWidth =  document.getElementById('img-handler').offsetWidth
-              var vidLink1 = document.createElement('iframe'); 
-                vidLink1.width= targetWidth ;
-                vidLink1.height= targetWidth * 0.5625;
-                vidLink1.src = record.yt
-                document.getElementById('img-handler').appendChild(vidLink1); 
-                vidLink1.setAttribute('allowFullScreen', '')
-            }
-
-            if(record["Extra Links"]){
-              var targetWidth =  document.getElementById('img-handler').offsetWidth
-              var vidLink = document.createElement('iframe'); 
-                vidLink.width= targetWidth ;
-                vidLink.height= targetWidth * 0.5625 ;
-                vidLink.src = record["Extra Links"]
-                document.getElementById('img-handler').appendChild(vidLink); 
-                vidLink.setAttribute('allowFullScreen', '')
-            }
-
         let imgLength = record.Img1.length;
          for(i=0;i<imgLength;i++){
              var img = document.createElement('img'); 
               img.src = record.Img1[i].url
               document.getElementById('img-handler').appendChild(img); 
+         }
+
+         if(record.yt){
+          var targetWidth =  document.getElementById('img-handler').offsetWidth
+           var vidLink1 = document.createElement('iframe'); 
+             vidLink1.width= targetWidth ;
+             vidLink1.height= targetWidth * 0.5625;
+             vidLink1.src = record.yt
+             document.getElementById('img-handler').appendChild(vidLink1); 
+             vidLink1.setAttribute('allowFullScreen', '')
+         }
+
+         if(record["Extra Links"]){
+           var targetWidth =  document.getElementById('img-handler').offsetWidth
+           var vidLink = document.createElement('iframe'); 
+             vidLink.width= targetWidth ;
+             vidLink.height= targetWidth * 0.5625 ;
+             vidLink.src = record["Extra Links"]
+             document.getElementById('img-handler').appendChild(vidLink); 
+             vidLink.setAttribute('allowFullScreen', '')
          }
 
          let nextProjectBtn = document.getElementById('nxt-project');
@@ -104,6 +104,7 @@ var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
                           projectLocation = 1; 
                       }
                 var nextProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
+                console.log(nextProjectHref)
                     nextProjectSrc.href = nextProjectHref
         });
 

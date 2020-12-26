@@ -24,12 +24,16 @@ import {
   var base = new Airtable({ apiKey: "keyMKnZBFsdFtC0UX" }).base(
   'appvMjgA3Di00eDev'
  );
+ let btnElement = document.getElementById("next");
+ let backElement = document.getElementById("back");
  let initTextSize = 0.7;
  let initTxtSize2 = 0.16
  let yPosShift = 0;
  let kick = 0; 
  if (window.innerWidth < 750)  {
-  initTextSize = 0.2
+  btnElement = document.getElementById("next-phone");
+  backElement = document.getElementById("back-phone");
+  initTextSize = 0.3
   initTxtSize2 = 0.1
   yPosShift = 0.5;
   kick = -0.08
@@ -41,8 +45,6 @@ import {
   let myCoolBool = false;
   let colors = ['#000000','#A55C1B','#485461','#655B50','#517FA4'];
   var indexColor = 0; 
-  let btnElement = document.getElementById("next");
-  let backElement = document.getElementById("back");
   let geometryBall = new SphereGeometry(0.5, 8, -30);
   let geometries = [ new SphereGeometry(0.5, 8, -30), new SphereGeometry( 0.5, 16, 16 ), new BoxGeometry(0.5, 0.5, 0.5), new TetrahedronGeometry (0.5), new DodecahedronGeometry (0.5) ]; 
   const cursor = curDot({

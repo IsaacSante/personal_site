@@ -43830,13 +43830,17 @@ var Airtable = require("airtable");
 var base = new Airtable({
   apiKey: "keyMKnZBFsdFtC0UX"
 }).base('appvMjgA3Di00eDev');
+var btnElement = document.getElementById("next");
+var backElement = document.getElementById("back");
 var initTextSize = 0.7;
 var initTxtSize2 = 0.16;
 var yPosShift = 0;
 var kick = 0;
 
 if (window.innerWidth < 750) {
-  initTextSize = 0.2;
+  btnElement = document.getElementById("next-phone");
+  backElement = document.getElementById("back-phone");
+  initTextSize = 0.3;
   initTxtSize2 = 0.1;
   yPosShift = 0.5;
   kick = -0.08;
@@ -43848,8 +43852,6 @@ var enterString = "Welcome";
 var myCoolBool = false;
 var colors = ['#000000', '#A55C1B', '#485461', '#655B50', '#517FA4'];
 var indexColor = 0;
-var btnElement = document.getElementById("next");
-var backElement = document.getElementById("back");
 var geometryBall = new _three.SphereGeometry(0.5, 8, -30);
 var geometries = [new _three.SphereGeometry(0.5, 8, -30), new _three.SphereGeometry(0.5, 16, 16), new _three.BoxGeometry(0.5, 0.5, 0.5), new _three.TetrahedronGeometry(0.5), new _three.DodecahedronGeometry(0.5)];
 var cursor = (0, _cursorDot.default)({
@@ -44132,7 +44134,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49982" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51659" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

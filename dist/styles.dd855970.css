@@ -12,10 +12,6 @@ body {
     color:white;
     overflow-x: hidden;
 }
-.mobile-nav {
-   visibility: hidden;
-   display: none;
-}
 .cursor-class {
     mix-blend-mode: difference;
 }
@@ -84,7 +80,7 @@ justify-content: flex-end;
     opacity: 0%;
 }
 
-.next{
+.next, .next-phone{
   padding: 1rem;
   background-image: url(/next.a40e4105.svg);
   background-size:100% 100%;
@@ -98,7 +94,7 @@ justify-content: flex-end;
   filter: invert(100%);
 } 
 
-.back{
+.back, .back-phone{
    padding: 1rem;
     background-image: url(/next.a40e4105.svg);
     background-size:100% 100%;
@@ -111,6 +107,19 @@ justify-content: flex-end;
     top: 50%;
     transform: scaleX(-1);
     filter: invert(100%);
+}
+
+.back-phone {
+    top: 80%;
+    display: none;
+    margin-left: 1rem;
+}
+
+.next-phone{
+    top: 80%;
+    right: 0%;
+    margin-right: 1rem;
+    display: none;
 }
 
 .next:hover, .back:hover {
@@ -168,20 +177,22 @@ animation-play-state: running;
 }
 
 .link-btns {
-position: absolute;
+position: fixed;
 display: flex;
 justify-content: space-between;
 margin-top: 20%;
 margin-left: 2%;
+z-index: 100000000;
 }
 
 .link-btns2 {
-    position: absolute;
+    position: fixed;
     right: 0;
     display: flex;
     justify-content: flex-end;
     margin-top:  20%;
     margin-right: 2%;
+    z-index: 100000000;
  }
 
 .live, .nxt-project {
@@ -265,6 +276,24 @@ header {
     padding: 10px 10%;
     padding-top: 4rem;
 }
+footer {
+
+}
+.inside {
+    position: absolute;
+    z-index: 100000000;
+    bottom: 0%;
+    left: 50;
+    display: flex;
+    justify-content:center;
+    align-items: center; 
+    width: 80%;
+    height: 10%;
+    background-color: red;
+    filter: blur(20px);
+    opacity: 50%;
+}
+
 .nav-links {
     list-style: none;
 }
@@ -275,17 +304,6 @@ header {
 .nav-links li a {
     transition: all 0.3s ease 0s;
 }
-
-footer {
-    background-color: #555;
-    color: #bbb;
-    line-height: 1.5;
-}
-footer a {
-    text-decoration: none;
-    color: #eee;
-}
-
 a::after {
     content: '';
     display: block;
@@ -632,8 +650,33 @@ padding-top:10rem;
   body{
    overflow: visible;
   }
+  header{
+      padding: 2%;
+}
+.link-btns{
+    width: 50%;
+    height: 50%;
+    margin-top: -10%;
+    margin-left: 0%;
+    position: fixed;
+    opacity: 50%;
+    z-index: 10000000;
+}
+.link-btns2{
+    width: 50%;
+    height: 50%;
+    margin-top: -10%;
+    margin-right: 0%;
+    position: fixed;
+    opacity: 50%;
+    z-index: 10000000;
+}
+.right-cont {
+    flex-basis: auto;
+    justify-content: start;
+}
   .background-img {
-    opacity: 10%;
+    opacity: 30%;
   }
   .next{
       top: 85%;
@@ -659,9 +702,19 @@ padding-top:10rem;
   .wrapper-cont{
     padding: 5px 1%;
   }
-  header {
-     padding: 10px 1%;
+.back-phone, .next-phone {
+    opacity: 20%;
+    display: inline;
+}
+/* .back-phone {
+    margin-left: 2%;
+} */
+  .back, .next {
+      display: none;
+      width: 0%;
+      height: 0%;
   }
+
   .logo{
     padding: 5px 10px;
     width:3em;
@@ -670,6 +723,10 @@ padding-top:10rem;
   .nav-links li {
     display: inline-block;
     padding: 0px 10px;
+}
+.middle{
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 li, a {
@@ -724,12 +781,15 @@ font-size: 1.2rem;
 .year {
 padding:1rem;
 padding-top:1rem;
-display:flex;
 }
 .right h1{
    font-size: 4rem; 
    width:100%;
 padding-bottom:2rem;
+}
+.left {
+    padding: 0%;
+    height: 500px;
 }
 }
 

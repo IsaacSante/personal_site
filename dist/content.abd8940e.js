@@ -7378,6 +7378,14 @@ function createInterface(record, records) {
     vizLink.classList.add("data-viz");
   }
 
+  var imgLength = record.Img1.length;
+
+  for (i = 0; i < imgLength; i++) {
+    var img = document.createElement('img');
+    img.src = record.Img1[i].url;
+    document.getElementById('img-handler').appendChild(img);
+  }
+
   if (record.yt) {
     var targetWidth = document.getElementById('img-handler').offsetWidth;
     var vidLink1 = document.createElement('iframe');
@@ -7398,14 +7406,6 @@ function createInterface(record, records) {
     vidLink.setAttribute('allowFullScreen', '');
   }
 
-  var imgLength = record.Img1.length;
-
-  for (i = 0; i < imgLength; i++) {
-    var img = document.createElement('img');
-    img.src = record.Img1[i].url;
-    document.getElementById('img-handler').appendChild(img);
-  }
-
   var nextProjectBtn = document.getElementById('nxt-project');
   nextProjectBtn.addEventListener("click", function () {
     projectLocation = (projectLocation + 1) % records.length;
@@ -7415,6 +7415,7 @@ function createInterface(record, records) {
     }
 
     var nextProjectHref = 'content.html?' + records[projectLocation].fields.Slug;
+    console.log(nextProjectHref);
     nextProjectSrc.href = nextProjectHref;
   });
   var backwards = document.getElementById('back-project');
@@ -7456,7 +7457,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49982" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51659" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

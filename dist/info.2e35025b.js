@@ -32631,6 +32631,11 @@ cursor.classList.add('cursor-class');
 var canvasParent = document.getElementById("left-cont");
 var parentWidth = canvasParent.offsetWidth;
 var parentHeight = canvasParent.offsetHeight;
+var scale = 2.5;
+
+if (window.innerWidth < 750) {
+  scale = 1.5;
+}
 
 var Sketch = function Sketch(p) {
   var obj, pg;
@@ -32654,7 +32659,7 @@ var Sketch = function Sketch(p) {
     p.rotateX(p.QUARTER_PI / 4);
     p.rotateY(p.radians(p.frameCount / 2));
     p.rotateY(p.radians(40));
-    p.scale(2.5);
+    p.scale(scale);
     p.translate(0, 40);
     p.model(obj);
     pg.clear();
@@ -32708,7 +32713,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49982" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51659" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

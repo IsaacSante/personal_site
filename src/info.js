@@ -11,6 +11,11 @@ const canvasParent = document.getElementById("left-cont")
 let parentWidth = canvasParent.offsetWidth
 let parentHeight = canvasParent.offsetHeight
 
+let scale = 2.5
+if (window.innerWidth < 750)  {
+scale = 1.5
+   }
+
 const Sketch = (p) => {
     let obj, pg;
 
@@ -33,7 +38,7 @@ const Sketch = (p) => {
             p.rotateX(p.QUARTER_PI/4)
             p.rotateY(p.radians(p.frameCount/2))
             p.rotateY(p.radians(40))
-            p.scale(2.5)
+            p.scale(scale)
             p.translate(0, 40)
             p.model(obj)
                 pg.clear()

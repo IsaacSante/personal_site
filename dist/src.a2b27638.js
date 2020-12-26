@@ -43840,9 +43840,9 @@ var kick = 0;
 if (window.innerWidth < 750) {
   btnElement = document.getElementById("next-phone");
   backElement = document.getElementById("back-phone");
-  initTextSize = 0.3;
+  initTextSize = 0.25;
   initTxtSize2 = 0.1;
-  yPosShift = 0.5;
+  yPosShift = 0.8;
   kick = -0.08;
 }
 
@@ -44134,7 +44134,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51659" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65364" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

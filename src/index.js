@@ -33,9 +33,9 @@ import {
  if (window.innerWidth < 750)  {
   btnElement = document.getElementById("next-phone");
   backElement = document.getElementById("back-phone");
-  initTextSize = 0.3
+  initTextSize = 0.25
   initTxtSize2 = 0.1
-  yPosShift = 0.5;
+  yPosShift = 0.8;
   kick = -0.08
  }
 
